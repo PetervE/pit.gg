@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pitgg-dev-235632-authRole",
+      "UnauthRoleArn": "arn:aws:iam::897517238696:role/amplify-pitgg-dev-235632-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::897517238696:role/amplify-pitgg-dev-235632-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-pitgg-dev-235632-deployment",
+      "UnauthRoleName": "amplify-pitgg-dev-235632-unauthRole",
+      "StackName": "amplify-pitgg-dev-235632",
+      "StackId": "arn:aws:cloudformation:eu-central-1:897517238696:stack/amplify-pitgg-dev-235632/09369e10-7e06-11eb-9b66-0a05df596088",
+      "AmplifyAppId": "d3ai6vbypdj50"
+    }
+  }
+}
