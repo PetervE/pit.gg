@@ -12,6 +12,15 @@ export default function Home() {
 
   const [workoutData, setWorkoutData] = useState([]);
 
+
+  function randomRgbaString (alpha) {
+    let r = Math.floor(Math.random() * 255)
+    let g = Math.floor(Math.random() * 255)
+    let b = Math.floor(Math.random() * 255)
+    let a = alpha
+    return `rgba(${r},${g},${b},${a})`
+  }
+
   const toggleColorMode = () => {
     console.log("current", localStorage.theme);
     if (localStorage.theme === "light") {
@@ -47,7 +56,7 @@ export default function Home() {
 
   useEffect(() => {
     if (workouts) drawGraph();
-  }, [workouts]);
+  }, [activeExercise]);
 
   // get workouts, excercises and set active exercise
   const getLiftLogs = async () => {
@@ -75,14 +84,21 @@ export default function Home() {
   };
 
   const drawGraph = () => {
+    console.log(workouts);
+    console.log(exercises);
+
+    let final = workouts.reduce((memo, e) => {
+
+    }, [])
+
     setWorkoutData([
       {
         id: "japan",
-        color: "hsl(202, 70%, 50%)",
+        color: "hsl(0, 0%, 80%)",
         data: [
           {
             x: "plane",
-            y: 21,
+            y: 0,
           },
           {
             x: "helicopter",
@@ -135,7 +151,6 @@ export default function Home() {
 
   const changeExercise = (e) => {
     setActiveExercise(e);
-    drawGraph();
   };
 
   if (!exercises || !activeExercise) return null;
@@ -164,6 +179,8 @@ export default function Home() {
       <div className="h-screen flex flex-col flex-wrap justify-start content-center">
         <div className="flex flex-wrap w-full h-2/4">
           <ResponsiveLine
+            colors={[randomRgbaString(1)]}
+            colors={{ scheme: "accent" }}
             data={workoutData}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: "point" }}
@@ -174,7 +191,6 @@ export default function Home() {
               stacked: true,
               reverse: false,
             }}
-            colors={{ scheme: "nivo" }}
             theme={{
               legends: {
                 text: { fill: darkModeActive ? "white" : "black" },
@@ -227,7 +243,6 @@ export default function Home() {
             useMesh={true}
             legends={[
               {
-                itemTextColor: "#ffffff",
                 anchor: "top-right",
                 direction: "column",
                 justify: false,
