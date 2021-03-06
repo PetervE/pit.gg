@@ -1,6 +1,4 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
-
 import { useEffect } from "react";
 
 export default function Home() {
@@ -31,14 +29,15 @@ export default function Home() {
   return (
     <div className="bg-white dark:bg-gray-800">
       <Head>
-        <title>Create Next App</title>
+        <title>Peter van Egeraat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="h-screen">
-        <button onClick={toggleColorMode}>Light</button>
-        <button onClick={toggleColorMode}>Dark</button>
-        <h1 className="text-gray-900 dark:text-white">Dark mode is here!</h1>
-        <p className="text-gray-600 dark:text-gray-300">Lorem ipsum...</p>
+      <nav className="bg-blue-400 dark:bg-red-400">
+        <button onClick={toggleColorMode}>Toggle</button>
+      </nav>
+      <div className="h-screen flex flex-col flex-wrap justify-center content-center">
+        <h1 className="text-gray-900 text-5xl font-display dark:text-white">Dark mode is here!</h1>
+        <p className="text-gray-900 text-base font-body dark:text-white">Some content text</p>
       </div>
     </div>
   );

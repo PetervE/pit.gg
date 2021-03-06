@@ -1,11 +1,18 @@
 module.exports = {
   purge: [],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: ["Helvetica", "Arial", "sans-serif"],
+        display: ["Oswald", "sans-serif"],
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      textOpacity: ["dark"],
+    },
   },
   plugins: [],
-}
+};
