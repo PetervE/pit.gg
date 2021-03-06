@@ -1,11 +1,14 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Select from "react-select";
 import { Storage } from "aws-amplify";
 import { ResponsiveLine } from "@nivo/line";
 
 export default function Home() {
   const [darkModeActive, setDarkModeActive] = useState(true);
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState(false);
+  const [exercises, setExercises] = useState(false);
+  const [activeExercise, setActiveExercise] = useState(false);
 
   const [workoutData, setWorkoutData] = useState([]);
 
@@ -15,6 +18,10 @@ export default function Home() {
     return () => {};
   }, []);
 
+  useEffect(() => {
+    if (workouts) drawGraph();
+  }, [workouts]);
+
   const getLiftLogs = async () => {
     try {
       const logs = await Storage.get("logs/fithero-backup-2021-03-05.json", {
@@ -22,8 +29,18 @@ export default function Home() {
       });
       const value = await new Response(logs.Body).json();
       setWorkouts(value.workouts || []);
-      console.log(value.workouts);
-      drawGraph();
+
+      const final = value.workouts.reduce((memo, workout) => {
+        workout.exercises.map((e) => {
+          memo[e.type] = memo[e.type] || [];
+          memo[e.type].push(e);
+        });
+        return memo;
+      }, {});
+      setExercises(final);
+
+      let active = Object.keys(final)[0];
+      setActiveExercise({ value: active, label: active.replaceAll("-", " ") });
     } catch (err) {
       console.log(err);
     }
@@ -41,7 +58,7 @@ export default function Home() {
           },
           {
             x: "helicopter",
-            y: 246,
+            y: 0,
           },
           {
             x: "boat",
@@ -115,6 +132,15 @@ export default function Home() {
     }
   };
 
+  const changeExercise = (e) => {
+    setActiveExercise(e);
+    drawGraph();
+  };
+
+  if (!exercises || !activeExercise) return null;
+
+  let exercisesList = Object.keys(exercises);
+
   return (
     <div className="bg-white dark:bg-gray-800">
       <Head>
@@ -124,9 +150,20 @@ export default function Home() {
       <nav className="bg-blue-400 dark:bg-red-400">
         <button onClick={toggleColorMode}>Toggle</button>
       </nav>
-      <div></div>
+      <header className="flex flex-wrap justify-center">
+        <div className="w-96 m-8">
+          <Select
+            value={activeExercise}
+            onChange={changeExercise}
+            options={exercisesList.reduce((memo, e) => {
+              memo.push({ value: e, label: e.replaceAll("-", " ") });
+              return memo;
+            }, [])}
+          />
+        </div>
+      </header>
       <div className="h-screen flex flex-col flex-wrap justify-center content-center">
-        <div className="flex flex-wrap w-2/4 h-2/4">
+        <div className="flex flex-wrap w-full h-2/4">
           <ResponsiveLine
             data={workoutData}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -157,8 +194,8 @@ export default function Home() {
               grid: {
                 line: {
                   stroke: darkModeActive ? "white" : "black",
-                  strokeWidth: 2,
-                  strokeDasharray: "4 4",
+                  strokeWidth: 1,
+                  strokeDasharray: "0 0",
                 },
               },
             }}
