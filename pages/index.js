@@ -2,7 +2,12 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { Storage } from "aws-amplify";
-import { ResponsiveLine } from "@nivo/line";
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
+
+import { randomHue } from "../components/constants";
+
+import NivoLine from "../components/NivoLine";
+import NivoBar from "../components/NivoBar";
 
 export default function Home() {
   const [darkModeActive, setDarkModeActive] = useState(true);
@@ -12,13 +17,12 @@ export default function Home() {
 
   const [workoutData, setWorkoutData] = useState([]);
 
-
-  function randomRgbaString (alpha) {
-    let r = Math.floor(Math.random() * 255)
-    let g = Math.floor(Math.random() * 255)
-    let b = Math.floor(Math.random() * 255)
-    let a = alpha
-    return `rgba(${r},${g},${b},${a})`
+  function randomRgbaString(alpha) {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    let a = alpha;
+    return `rgba(${r},${g},${b},${a})`;
   }
 
   const toggleColorMode = () => {
@@ -61,7 +65,7 @@ export default function Home() {
   // get workouts, excercises and set active exercise
   const getLiftLogs = async () => {
     try {
-      const logs = await Storage.get("logs/fithero-backup-2021-03-05.json", {
+      const logs = await Storage.get("logs/fithero-backup-2021-03-06.json", {
         download: true,
       });
       const value = await new Response(logs.Body).json();
@@ -84,69 +88,49 @@ export default function Home() {
   };
 
   const drawGraph = () => {
-    console.log(workouts);
-    console.log(exercises);
+    let colors = {
+      set1Color: false,
+      set2Color: false,
+      set3Color: false,
+      set4Color: false,
+      set5Color: false,
+      set6Color: false,
+      set7Color: false,
+      set8Color: false,
+      set9Color: false,
+      set10Color: false,
+    };
 
-    let final = workouts.reduce((memo, e) => {
+    let workoutList = workouts.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
 
-    }, [])
+    let final = workoutList.reduce((memo, workout) => {
+      let find = workout.exercises.find((e) => e.type === activeExercise.value);
+      if (find) {
+        const payload = {
+          date: formatRelative(new Date(workout.date), new Date()),
+        };
 
-    setWorkoutData([
-      {
-        id: "japan",
-        color: "hsl(0, 0%, 80%)",
-        data: [
-          {
-            x: "plane",
-            y: 0,
-          },
-          {
-            x: "helicopter",
-            y: 0,
-          },
-          {
-            x: "boat",
-            y: 248,
-          },
-          {
-            x: "train",
-            y: 57,
-          },
-          {
-            x: "subway",
-            y: 289,
-          },
-          {
-            x: "bus",
-            y: 133,
-          },
-          {
-            x: "car",
-            y: 146,
-          },
-          {
-            x: "moto",
-            y: 86,
-          },
-          {
-            x: "bicycle",
-            y: 232,
-          },
-          {
-            x: "horse",
-            y: 147,
-          },
-          {
-            x: "skateboard",
-            y: 290,
-          },
-          {
-            x: "others",
-            y: 178,
-          },
-        ],
-      },
-    ]);
+        find.sets.map((e, i) => {
+          const numberId = `set ${String(i++)}`;
+          const colorId = `set${String(i++)}Color`;
+
+          let colorExists = colors[colorId] !== false;
+          if (!colorExists) {
+            colors[colorId] = `hsl(${randomHue()}, 70%, 50%)`;
+          }
+
+          payload[numberId] = e.reps * e.weight;
+
+          payload[colorId] = colors[colorId];
+        });
+
+        memo.push(payload);
+      }
+      return memo;
+    }, []);
+    setWorkoutData(final);
   };
 
   const changeExercise = (e) => {
@@ -178,96 +162,8 @@ export default function Home() {
       </header>
       <div className="h-screen flex flex-col flex-wrap justify-start content-center">
         <div className="flex flex-wrap w-full h-2/4">
-          <ResponsiveLine
-            colors={[randomRgbaString(1)]}
-            colors={{ scheme: "accent" }}
-            data={workoutData}
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-            xScale={{ type: "point" }}
-            yScale={{
-              type: "linear",
-              min: "auto",
-              max: "auto",
-              stacked: true,
-              reverse: false,
-            }}
-            theme={{
-              legends: {
-                text: { fill: darkModeActive ? "white" : "black" },
-              },
-              axis: {
-                legend: { text: { fill: darkModeActive ? "white" : "black" } },
-                ticks: {
-                  line: {
-                    stroke: "green",
-                  },
-                  text: {
-                    fill: darkModeActive ? "white" : "black",
-                  },
-                },
-              },
-              grid: {
-                line: {
-                  stroke: darkModeActive ? "white" : "black",
-                  strokeWidth: 1,
-                  strokeDasharray: "0 0",
-                },
-              },
-            }}
-            yFormat=" >-.2f"
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              orient: "bottom",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "transportation",
-              legendOffset: 36,
-              legendPosition: "middle",
-            }}
-            axisLeft={{
-              orient: "left",
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "count",
-              legendOffset: -40,
-              legendPosition: "middle",
-            }}
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabelYOffset={-12}
-            useMesh={true}
-            legends={[
-              {
-                anchor: "top-right",
-                direction: "column",
-                justify: false,
-                translateX: 100,
-                translateY: 0,
-                itemsSpacing: 0,
-                itemDirection: "left-to-right",
-                itemWidth: 80,
-                itemHeight: 20,
-                itemOpacity: 0.75,
-                symbolSize: 12,
-                symbolShape: "circle",
-                symbolBorderColor: "rgba(0, 0, 0, .5)",
-                effects: [
-                  {
-                    on: "hover",
-                    style: {
-                      itemBackground: "rgba(0, 0, 0, .03)",
-                      itemOpacity: 1,
-                    },
-                  },
-                ],
-              },
-            ]}
-          />
+          {/* <NivoLine darkModeActive={darkModeActive} data={workoutData} /> */}
+          <NivoBar darkModeActive={darkModeActive} data={workoutData} />
         </div>
       </div>
     </div>
