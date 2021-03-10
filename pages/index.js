@@ -392,7 +392,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="flex flex-grow-0 bg-white dark:bg-gray-600 justify-end py-5">
+      <nav className="flex flex-grow-0 bg-gray-100 dark:bg-gray-600 justify-end py-5">
         <div className="flex flex-0 flex-col sm:px-10 pl-5 pr-3">
           <h1 className="dark:text-white text-2xl font-display">
             Peter van Egeraat
