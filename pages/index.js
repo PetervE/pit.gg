@@ -329,11 +329,7 @@ const PROJECTS = [
     description: "This website.",
     github: "https://github.com/PetervE/pit.gg",
     website: "https://pit.gg",
-    languages: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-    ],
+    languages: ["HTML", "CSS", "JavaScript"],
     technologies: [
       {
         name: "React",
@@ -427,9 +423,10 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="flex flex-1 justify-start align-center flex-col">
-        <div className="flex justify-start flex-col sm:px-10 px-5 pb-2">
-          <div className="flex py-5">
+      <div className="flex flex-1 justify-start align-center flex-col py-2">
+        
+        <div className="flex justify-start flex-col sm:px-10 px-5 pb-4">
+          <div className="flex py-5 flex-wrap flex-row">
             <img
               src={img}
               alt="Peter"
@@ -437,52 +434,60 @@ export default function Home() {
               width="150"
               style={{ height: 150, width: 150 }}
             />
-          </div>
-          <h1 className="dark:text-white text-3xl font-display pb-2">About</h1>
-          <p className="dark:text-white text-base font-sans max-w-3xl leading-8">
-            I use React and React Native to develop applications for Web, iOS
-            and Android. Designing new products in Sketch and Adobe software is
-            also something I enjoy. In my free time you can find me in the gym
-            or spending time with members of my{" "}
-            <a
-              className="text-blue-400 font-semibold underline"
-              target="_blank"
-              href="http://fearless.gg"
-            >
-              Fearless
-            </a>{" "}
-            organization.
-          </p>
-        </div>
-        <div className="flex justify-start flex-col sm:px-10 px-5 py-2 max-w-3xl">
-          <IconContext.Provider
-            value={{ color: darkModeActive ? "#fbbf24" : "#CCCCCC" }}
-          >
-            <div className="flex flex-wrap flex-row justify-evenly py-5">
-              <a
-                className="flex"
-                target="_blank"
-                href="https://github.com/PetervE"
+            <div className="flex flex-1 max-w-md justify-center flex-col">
+              <IconContext.Provider
+                value={{ color: darkModeActive ? "#fbbf24" : "#CCCCCC" }}
               >
-                <FaGithub size={50} />
-              </a>
-              <a
-                className="flex"
-                target="_blank"
-                href="https://www.linkedin.com/in/petervanegeraat/"
-              >
-                <FaLinkedin size={50} />
-              </a>
-              <a
-                className="flex"
-                target="_blank"
-                href="https://twitter.com/petervanegeraat"
-              >
-                <FaTwitter size={50} />
-              </a>
+                <div className="flex flex-wrap flex-row justify-evenly py-5">
+                  <a
+                    className="flex"
+                    target="_blank"
+                    href="https://github.com/PetervE"
+                  >
+                    <FaGithub size={30} />
+                  </a>
+                  <a
+                    className="flex"
+                    target="_blank"
+                    href="https://www.linkedin.com/in/petervanegeraat/"
+                  >
+                    <FaLinkedin size={30} />
+                  </a>
+                  <a
+                    className="flex"
+                    target="_blank"
+                    href="https://twitter.com/petervanegeraat"
+                  >
+                    <FaTwitter size={30} />
+                  </a>
+                </div>
+              </IconContext.Provider>
             </div>
-          </IconContext.Provider>
+          </div>
+
+          <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
+            About
+          </h1>
+          <div>
+            <div className="border-l-2 pl-5 border-gray-800 dark:border-gray-400">
+              <p className="dark:text-white text-base font-sans max-w-3xl leading-8">
+                I use React and React Native to develop applications for Web,
+                iOS and Android. Designing new products in Sketch and Adobe
+                software is also something I enjoy. In my free time you can find
+                me in the gym or spending time with members of my{" "}
+                <a
+                  className="text-blue-400 font-semibold underline"
+                  target="_blank"
+                  href="http://fearless.gg"
+                >
+                  Fearless
+                </a>{" "}
+                organization.
+              </p>
+            </div>
+          </div>
         </div>
+
         <div className="flex justify-start flex-col sm:px-10 px-5 py-2">
           <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
             Work history
