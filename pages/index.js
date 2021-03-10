@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { Storage } from "aws-amplify";
@@ -263,6 +262,96 @@ const WORK_HISTORY = [
   },
 ];
 
+const EDUCATION = [
+  {
+    name: "HBO: Communication & Multimedia Design ",
+    description: "",
+    website:
+      "https://www.avans.nl/opleidingen/opleidingzoeker/communication--multimedia-design-breda-voltijd-bachelor/introductie",
+    begin_date: new Date("2012/8/1"),
+    end_date: new Date("2017/1/1"),
+  },
+  {
+    name: "NTI: Desktop Publishing",
+    description: "",
+    website:
+      "https://www.nti.nl/beroepsopleidingen/ict-opleidingen/desktop-publishing-dtp/",
+    begin_date: new Date("2011/2/1"),
+    end_date: new Date("2011/7/1"),
+  },
+];
+
+const PROJECTS = [
+  {
+    name: "Wereldhonden",
+    description: "",
+    website: "https://wereldhonden.nl",
+    languages: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "CocoaPods",
+      "Gradle",
+      "NodeJS",
+      "GraphQL",
+      "AWS S3",
+      "AWS DynamoDB",
+      "AWS Cognito",
+      "AWS Lambda",
+    ],
+    technologies: [
+      {
+        name: "React",
+        website: "https://reactjs.org",
+      },
+      {
+        name: "React Native",
+        website: "https://reactnative.dev",
+      },
+      {
+        name: "AWS Amplify",
+        website: "https://aws.amazon.com/amplify/",
+      },
+      {
+        name: "Sketch",
+        website: "https://www.sketch.com/",
+      },
+    ],
+  },
+  {
+    name: "Portfolio",
+    description: "",
+    website: "https://pit.gg",
+    languages: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "AWS S3",
+      "AWS DynamoDB",
+      "AWS Cognito",
+      "AWS Lambda",
+    ],
+    technologies: [
+      {
+        name: "React",
+        website: "https://reactjs.org",
+      },
+      {
+        name: "NextJS",
+        website: "https://nextjs.org/",
+      },
+      {
+        name: "AWS Amplify",
+        website: "https://aws.amazon.com/amplify/",
+      },
+      {
+        name: "Sketch",
+        website: "https://www.sketch.com/",
+      },
+    ],
+  },
+];
+
 export default function Home() {
   const [darkModeActive, setDarkModeActive] = useState(true);
 
@@ -447,6 +536,85 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+          <div className="flex justify-start flex-col py-2">
+            <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
+              Education
+            </h1>
+            <div className="">
+              {EDUCATION.map((work, i) => {
+                return (
+                  <div
+                    key={`work-${i}`}
+                    className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
+                  >
+                    <h1 className="font-semibold dark:text-white">
+                      {work.name}
+                    </h1>
+                    <p className="">
+                      <small className="dark:text-white">
+                        {`${format(work.begin_date, "LLLL yyyy")}`}
+                      </small>
+                      <small className="dark:text-white"> - </small>
+                      <small className="dark:text-white">
+                        {`${
+                          work.end_date
+                            ? format(work.end_date, "LLLL yyyy")
+                            : "now"
+                        }`}
+                      </small>
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex justify-start flex-col py-2">
+            <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
+              Projects
+            </h1>
+            <div className="">
+              {PROJECTS.map((project, i) => {
+                return (
+                  <div
+                    key={`work-${i}`}
+                    className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
+                  >
+                    <h1 className="font-semibold dark:text-white">
+                      {project.name}
+                    </h1>
+                    <div className="flex flex-wrap flex-row justify-start mt-2">
+                      {project.technologies.map((t, y) => {
+                        return (
+                          <a
+                            key={`${project.name}-${y}-${t.name}`}
+                            className="mt-2 mr-2 py-2 px-2 bg-gray-200 text-sm dark:bg-gray-400"
+                            target="_blank"
+                            href={t.website}
+                          >
+                            {t.name}
+                          </a>
+                        );
+                      })}
+                    </div>
+                    {project.languages && (
+                      <div className="flex flex-wrap flex-row justify-start mt-2 ">
+                        {project.languages.map((t, x) => {
+                          return (
+                            <small
+                              key={`${project.name}-${t}-x`}
+                              className="mr-1 mt-1 py-1 px-2 bg-gray-100 text-xs dark:bg-gray-500"
+                            >
+                              {t}
+                            </small>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
