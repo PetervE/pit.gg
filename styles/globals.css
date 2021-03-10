@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background-color: #222222;
+}
+
 .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
   background-color: #1F2937;
 }

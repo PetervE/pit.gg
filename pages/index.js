@@ -391,7 +391,7 @@ export default function Home() {
   if (darkModeActive === null) return null;
 
   return (
-    <div className="min-h-screen flex flex-1 flex-col dark:bg-white dark:bg-gray-800">
+    <div className="min-h-screen flex flex-1 flex-col bg-white dark:bg-white dark:bg-gray-800">
       <Head>
         <title>Peter van Egeraat</title>
         <link rel="icon" href="/favicon.ico" />
@@ -440,7 +440,7 @@ export default function Home() {
             />
           </div>
           <h1 className="dark:text-white text-3xl font-display pb-2">About</h1>
-          <p className="dark:text-white text-m font-sans max-w-3xl leading-8">
+          <p className="dark:text-white text-base font-sans max-w-3xl leading-8">
             I use React and React Native to develop applications for Web, iOS
             and Android. Designing new products in Sketch and Adobe software is
             also something I enjoy. In my free time you can find me in the gym
