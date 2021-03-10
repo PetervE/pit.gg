@@ -486,7 +486,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-start flex-col sm:px-10 px-5 py-2">
+        <div className="flex justify-start flex-col sm:px-10 px-5 py-2 mt-5">
           <div className="">
             <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
               Work history
