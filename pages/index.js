@@ -63,7 +63,7 @@ const WORK_HISTORY = [
       },
       {
         name: "Tailwind",
-        website: "https://aws.amazon.com/amplify/",
+        website: "https://tailwindcss.com/",
       },
       {
         name: "Photoshop",
@@ -491,20 +491,39 @@ export default function Home() {
               return (
                 <div
                   key={`work-${i}`}
-                  className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
+                  className="border-l-2 pl-5 border-gray-800 dark:border-gray-400 mb-10"
                 >
-                  <h1 className="font-semibold dark:text-white">{work.name}</h1>
-                  <p className="">
-                    <small className="dark:text-white">
-                      {`${format(work.begin_date, "LLLL yyyy")}`}
+                  {work.website ? (
+                    <a
+                      target="_blank"
+                      href={work.website}
+                      className="font-medium dark:text-white text-xl my-0 underline"
+                    >
+                      {work.name}
+                    </a>
+                  ) : (
+                    <span
+                      target="_blank"
+                      className="font-semibold dark:text-white text-xl my-0"
+                    >
+                      {work.name}
+                    </span>
+                  )}
+                  <p className="my-1">
+                    <small className="font-light dark:text-gray-300 text-sm mr-2">
+                      {work.position}
                     </small>
-                    <small className="dark:text-white"> - </small>
-                    <small className="dark:text-white">
+                    <small className="dark:text-gray-500">
+                      ({`${format(work.begin_date, "LLLL yyyy")}`}
+                    </small>
+                    <small className="dark:text-gray-500"> - </small>
+                    <small className="dark:text-gray-500">
                       {`${
                         work.end_date
                           ? format(work.end_date, "LLLL yyyy")
                           : "now"
                       }`}
+                      )
                     </small>
                   </p>
                   <div className="flex flex-wrap flex-row justify-start mt-2">
