@@ -424,7 +424,6 @@ export default function Home() {
       </nav>
 
       <div className="flex flex-1 justify-start align-center flex-col py-2">
-        
         <div className="flex justify-start flex-col sm:px-10 px-5 pb-4">
           <div className="flex py-5 flex-wrap flex-row">
             <img
@@ -464,7 +463,6 @@ export default function Home() {
               </IconContext.Provider>
             </div>
           </div>
-
           <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
             About
           </h1>
@@ -489,10 +487,10 @@ export default function Home() {
         </div>
 
         <div className="flex justify-start flex-col sm:px-10 px-5 py-2">
-          <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
-            Work history
-          </h1>
           <div className="">
+            <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
+              Work history
+            </h1>
             {WORK_HISTORY.map((work, i) => {
               return (
                 <div
@@ -564,6 +562,7 @@ export default function Home() {
               );
             })}
           </div>
+
           <div className="flex justify-start flex-col py-2">
             <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
               Education
@@ -607,6 +606,7 @@ export default function Home() {
               })}
             </div>
           </div>
+
           <div className="flex justify-start flex-col py-2">
             <h1 className="dark:text-white text-3xl font-display pb-2 mb-5">
               Projects
