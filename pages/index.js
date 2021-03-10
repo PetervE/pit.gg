@@ -473,9 +473,11 @@ export default function Home() {
           </h1>
           <div>
             <div className="border-l-2 pl-5 border-gray-800 dark:border-gray-400">
-              <p className="dark:text-white text-base font-sans max-w-3xl leading-8">
+              <p className="dark:text-white text-base font-sans max-w-2xl leading-8">
                 I use React and React Native to develop applications for Web,
-                iOS and Android. Designing new products in Sketch and Adobe
+                iOS and Android. For back-end related operations I use cloud
+                provider Amazon Web Services (AWS), resulting in scalable full
+                stack applications. Designing new products in Sketch and Adobe
                 software is also something I enjoy. In my free time you can find
                 me in the gym or spending time with members of my{" "}
                 <a
