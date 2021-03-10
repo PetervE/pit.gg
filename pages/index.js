@@ -516,9 +516,10 @@ export default function Home() {
                       {work.position}
                     </small>
                     <small>{`${format(work.begin_date, "LLLL yyyy")}`}</small>
+                    {work.end_date ? <small className="px-1">{` - `}</small> : null}
                     <small>
                       {work.end_date
-                        ? ` - ${format(work.end_date, "LLLL yyyy")}`
+                        ? `${format(work.end_date, "LLLL yyyy")}`
                         : ""}
                     </small>
                   </p>
