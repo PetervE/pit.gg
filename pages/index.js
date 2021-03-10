@@ -438,7 +438,7 @@ export default function Home() {
             />
           </div>
           <h1 className="dark:text-white text-3xl font-display pb-2">About</h1>
-          <p className="dark:text-white text-m font-sans max-w-lg leading-8">
+          <p className="dark:text-white text-m font-sans max-w-3xl leading-8">
             I use React and React Native to develop applications for Web, iOS
             and Android. Designing new products in Sketch and Adobe software is
             also something I enjoy. In my free time you can find me in the gym
@@ -453,7 +453,7 @@ export default function Home() {
             organization.
           </p>
         </div>
-        <div className="flex justify-start flex-col sm:px-10 px-5 py-2">
+        <div className="flex justify-start flex-col sm:px-10 px-5 py-2 max-w-3xl">
           <IconContext.Provider
             value={{ color: darkModeActive ? "#fbbf24" : "#CCCCCC" }}
           >
