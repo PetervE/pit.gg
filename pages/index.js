@@ -146,7 +146,7 @@ const WORK_HISTORY = [
   {
     name: "Holland Financial Business Group",
     description:
-      "Worked on building a Multifactor Authentication app to improve the security of their products.",
+      "Worked on a Multifactor Authentication (MFA) app to improve the security of their products.",
     website: "https://hfbg.nl",
     begin_date: new Date("2018/8/1"),
     end_date: new Date("2020/2/1"),
