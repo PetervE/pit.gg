@@ -326,17 +326,13 @@ const PROJECTS = [
   },
   {
     name: "pit.gg",
-    description: "This website",
+    description: "This website.",
     github: "https://github.com/PetervE/pit.gg",
     website: "https://pit.gg",
     languages: [
       "HTML",
       "CSS",
       "JavaScript",
-      "AWS S3",
-      "AWS DynamoDB",
-      "AWS Cognito",
-      "AWS Lambda",
     ],
     technologies: [
       {
