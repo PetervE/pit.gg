@@ -285,6 +285,7 @@ const PROJECTS = [
   {
     name: "Wereldhonden",
     description: "",
+    github: "https://github.com/PetervE/Wereldhonden",
     website: "https://wereldhonden.nl",
     languages: [
       "HTML",
@@ -321,6 +322,7 @@ const PROJECTS = [
   {
     name: "Portfolio",
     description: "",
+    github: "https://github.com/PetervE/pit.gg",
     website: "https://pit.gg",
     languages: [
       "HTML",
@@ -353,7 +355,7 @@ const PROJECTS = [
 ];
 
 export default function Home() {
-  const [darkModeActive, setDarkModeActive] = useState(true);
+  const [darkModeActive, setDarkModeActive] = useState(null);
 
   useEffect(() => {
     checkLocalStorage();
@@ -361,30 +363,30 @@ export default function Home() {
   }, []);
 
   const checkLocalStorage = () => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-      setDarkModeActive(true);
-    } else {
+    let status = localStorage.getItem("theme");
+    console.log(status);
+    if (status === "light") {
       document.documentElement.classList.remove("dark");
       setDarkModeActive(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      setDarkModeActive(true);
     }
   };
 
   const toggleColorMode = () => {
-    if (localStorage.theme === "light") {
-      localStorage.theme = "dark";
-      document.documentElement.classList.add("dark");
-      setDarkModeActive(true);
-    } else {
-      localStorage.theme = "light";
+    if (darkModeActive) {
+      localStorage.setItem("theme", "light");
       document.documentElement.classList.remove("dark");
       setDarkModeActive(false);
+    } else {
+      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add("dark");
+      setDarkModeActive(true);
     }
   };
+
+  if (darkModeActive === null) return null;
 
   return (
     <div className="min-h-screen flex flex-1 flex-col dark:bg-white dark:bg-gray-800">
@@ -580,9 +582,24 @@ export default function Home() {
                     key={`work-${i}`}
                     className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
                   >
-                    <h1 className="font-semibold dark:text-white">
-                      {project.name}
-                    </h1>
+                    <div className="flex flex-wrap">
+                      <h1 className="font-semibold dark:text-white">
+                        {project.name}
+                      </h1>
+
+                      <a className="ml-4" target="_blank" href={project.github}>
+                        <IconContext.Provider
+                          value={{
+                            color: darkModeActive ? "#fbbf24" : "#CCCCCC",
+                          }}
+                        >
+                          <div>
+                            <FaGithub size={30} />
+                          </div>
+                        </IconContext.Provider>
+                      </a>
+                    </div>
+
                     <div className="flex flex-wrap flex-row justify-start mt-2">
                       {project.technologies.map((t, y) => {
                         return (
