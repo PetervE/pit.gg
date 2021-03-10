@@ -476,10 +476,13 @@ export default function Home() {
               <p className="dark:text-white text-base font-sans max-w-2xl leading-8">
                 I use React and React Native to develop applications for Web,
                 iOS and Android. For back-end related operations I use cloud
-                provider Amazon Web Services (AWS), resulting in scalable full
-                stack applications. Designing new products in Sketch and Adobe
-                software is also something I enjoy. In my free time you can find
-                me in the gym or spending time with members of my{" "}
+                provider Amazon Web Services (AWS) resulting in scalable full
+                stack applications.
+              </p>
+              <p className="dark:text-white text-base font-sans max-w-2xl leading-8">
+                Designing new products in Sketch and Adobe software is also
+                something I enjoy. In my free time you can find me in the gym or
+                spending time with members of my{" "}
                 <a
                   className="text-blue-400 font-semibold underline"
                   target="_blank"
