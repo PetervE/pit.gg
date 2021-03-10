@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { Storage } from "aws-amplify";
@@ -335,7 +334,7 @@ export default function Home() {
       <div className="flex flex-1 justify-start align-center flex-col">
         <div className="flex justify-start flex-col sm:px-10 px-5 pb-2">
           <div className="flex py-5">
-            <Image src="/peter.jpg" alt="Peter" width={150} height={150} />
+            <img src="/peter.jpg" alt="Peter" height="150" width="150" />
           </div>
           <h1 className="dark:text-white text-3xl font-display pb-2">About</h1>
           <p className="dark:text-white text-m font-sans max-w-lg leading-8">
@@ -390,25 +389,26 @@ export default function Home() {
             {WORK_HISTORY.map((work, i) => {
               let beginDate = format(new Date(work.begin_date), "LLLL yyyy");
               let endDate = work.end_date ? new Date(work.end_date) : false;
-
               if (endDate) endDate = format(endDate, "LLLL yyyy");
-              console.log(endDate);
               return (
                 <div
                   key={`work-${i}`}
-                  className="border-l-2 pl-5 border-gray-800 mb-10"
+                  className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
                 >
-                  <h1 className="font-semibold ">{work.name}</h1>
+                  <h1 className="font-semibold dark:text-white">{work.name}</h1>
                   <p className="">
-                    <small>{beginDate}</small>
-                    <small> - </small>
-                    <small>{endDate ? endDate : "now"}</small>
+                    <small className="dark:text-white">{beginDate}</small>
+                    <small className="dark:text-white"> - </small>
+                    <small className="dark:text-white">
+                      {endDate ? endDate : "now"}
+                    </small>
                   </p>
                   <div className="flex flex-wrap flex-row justify-start mt-2">
-                    {work.technologies.map((t) => {
+                    {work.technologies.map((t, y) => {
                       return (
                         <a
-                          className="mt-2 mr-2 py-2 px-2 bg-gray-200 text-sm"
+                          key={`${work.name}-${y}-${t.name}`}
+                          className="mt-2 mr-2 py-2 px-2 bg-gray-200 text-sm dark:bg-gray-400"
                           target="_blank"
                           href={t.website}
                         >
@@ -418,10 +418,13 @@ export default function Home() {
                     })}
                   </div>
                   {work.languages && (
-                    <div className="flex flex-wrap flex-row justify-start mt-2">
-                      {work.languages.map((t) => {
+                    <div className="flex flex-wrap flex-row justify-start mt-2 ">
+                      {work.languages.map((t, x) => {
                         return (
-                          <small className="mr-1 mt-1 py-1 px-2 bg-gray-100 text-xs">
+                          <small
+                            key={`${work.name}-${t}-x`}
+                            className="mr-1 mt-1 py-1 px-2 bg-gray-100 text-xs dark:bg-gray-500"
+                          >
                             {t}
                           </small>
                         );

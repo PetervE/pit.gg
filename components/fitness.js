@@ -1,6 +1,6 @@
 import { format, formatDistance, formatRelative, subDays } from "date-fns";
-s
-export default Fitness = () => {
+
+export default function Fitness() {
   const [workouts, setWorkouts] = useState(false);
   const [exercises, setExercises] = useState(false);
   const [activeExercise, setActiveExercise] = useState(false);
@@ -136,4 +136,4 @@ export default Fitness = () => {
       </section>
     </div>
   );
-};
+}
