@@ -52,11 +52,14 @@ export default function Home() {
         <title>Peter van Egeraat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <nav className="flex flex-grow-0 bg-blue-400 dark:bg-gray-400 justify-end p-5">
+
+      <nav className="flex flex-grow-0 bg-white dark:bg-gray-600 justify-end sm:py-10 py-5">
         <div className="flex flex-1">
-          <h1>Peter van Egeraat</h1>
+          <h1 className="dark:text-white text-xl font-mono sm:px-10 px-5">
+            Peter van Egeraat
+          </h1>
         </div>
-        <div className="flex flex-0">
+        <div className="flex flex-0 sm:px-10 px-5">
           <Toggle
             className="h-5"
             defaultChecked={darkModeActive}
@@ -80,8 +83,17 @@ export default function Home() {
           />
         </div>
       </nav>
-      <div className="flex flex-1 flex-wrap">
-        <h1>HAllo</h1>
+
+      <div className="flex flex-1 justify-start align-center flex-col">
+        <div className="flex justify-start flex-col sm:p-10 p-5">
+          <h1 className="dark:text-white text-xl font-sans">About</h1>
+          <p className="dark:text-white text-m font-sans">
+            I use React and React Native to develop applications for Web, iOS
+            and Android. Designing new products in Sketch and Adobe software is
+            also something I enjoy. In my free time you can find me in the gym
+            or spending time with members of my Fearless organization.
+          </p>
+        </div>
       </div>
     </div>
   );
