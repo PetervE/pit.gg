@@ -76,7 +76,7 @@ export default function NivoBar(props) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Date",
+        legend: "",
         legendPosition: "middle",
         legendOffset: 32,
       }}

@@ -1,3 +1,4 @@
+import "react-toggle/style.css"
 import "../styles/globals.css";
 
 import Amplify from "aws-amplify";
