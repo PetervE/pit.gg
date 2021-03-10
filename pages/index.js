@@ -271,7 +271,8 @@ const WORK_HISTORY = [
 const EDUCATION = [
   {
     name: "HBO: Communication & Multimedia Design ",
-    description: "",
+    description:
+      "A broad study that covers all kinds of media and research techniques. I've gained a lot of experience by doing presentations, research and delivering products.",
     website:
       "https://www.avans.nl/opleidingen/opleidingzoeker/communication--multimedia-design-breda-voltijd-bachelor/introductie",
     begin_date: new Date("2012/8/1"),
@@ -279,7 +280,8 @@ const EDUCATION = [
   },
   {
     name: "NTI: Desktop Publishing",
-    description: "",
+    description:
+      "This course taught me to work with Adobe software Photoshop, Illustrator, InDesign. I've been using Adobe ever since and picked up Sketch along the way.",
     website:
       "https://www.nti.nl/beroepsopleidingen/ict-opleidingen/desktop-publishing-dtp/",
     begin_date: new Date("2011/2/1"),
@@ -290,7 +292,8 @@ const EDUCATION = [
 const PROJECTS = [
   {
     name: "Wereldhonden",
-    description: "",
+    description:
+      "Working on a native application to help stray dogs find a responsible human that takes care of them.",
     github: "https://github.com/PetervE/Wereldhonden",
     website: "https://wereldhonden.nl",
     languages: [
@@ -322,8 +325,8 @@ const PROJECTS = [
     ],
   },
   {
-    name: "Portfolio",
-    description: "",
+    name: "pit.gg",
+    description: "This website",
     github: "https://github.com/PetervE/pit.gg",
     website: "https://pit.gg",
     languages: [
@@ -516,7 +519,9 @@ export default function Home() {
                       {work.position}
                     </small>
                     <small>{`${format(work.begin_date, "LLLL yyyy")}`}</small>
-                    {work.end_date ? <small className="px-1">{` - `}</small> : null}
+                    {work.end_date ? (
+                      <small className="px-1">{` - `}</small>
+                    ) : null}
                     <small>
                       {work.end_date
                         ? `${format(work.end_date, "LLLL yyyy")}`
@@ -563,27 +568,38 @@ export default function Home() {
               Education
             </h1>
             <div className="">
-              {EDUCATION.map((work, i) => {
+              {EDUCATION.map((education, i) => {
                 return (
                   <div
                     key={`work-${i}`}
                     className="border-l-2 pl-5 border-gray-800 dark:border-gray-400 mb-10"
                   >
-                    <h1 className="font-semibold dark:text-white">
-                      {work.name}
-                    </h1>
-                    <p className="">
-                      <small className="dark:text-white">
-                        {`${format(work.begin_date, "LLLL yyyy")}`}
+                    <a
+                      target="_blank"
+                      href={education.website}
+                      className="font-light dark:text-white text-xl my-0 underline"
+                    >
+                      {education.name}
+                    </a>
+                    <p className="my-1 font-light text-sm dark:text-gray-600 flex align-center">
+                      <small className="text-sm dark:text-gray-400">
+                        {education.position}
                       </small>
-                      <small className="dark:text-white"> - </small>
-                      <small className="dark:text-white">
-                        {`${
-                          work.end_date
-                            ? format(work.end_date, "LLLL yyyy")
-                            : "now"
-                        }`}
+                      <small>{`${format(
+                        education.begin_date,
+                        "LLLL yyyy"
+                      )}`}</small>
+                      {education.end_date ? (
+                        <small className="px-1">{` - `}</small>
+                      ) : null}
+                      <small>
+                        {education.end_date
+                          ? `${format(education.end_date, "LLLL yyyy")}`
+                          : ""}
                       </small>
+                    </p>
+                    <p className="my-1 font-normal dark:text-gray-300 text-base max-w-3xl">
+                      {education.description}
                     </p>
                   </div>
                 );
@@ -602,9 +618,13 @@ export default function Home() {
                     className="border-l-2 pl-5 border-gray-800 dark:border-gray-400 mb-10"
                   >
                     <div className="flex flex-wrap">
-                      <h1 className="font-semibold dark:text-white">
+                      <a
+                        target="_blank"
+                        href={project.website}
+                        className="font-light dark:text-white text-xl my-0 underline"
+                      >
                         {project.name}
-                      </h1>
+                      </a>
 
                       <a className="ml-4" target="_blank" href={project.github}>
                         <IconContext.Provider
@@ -618,6 +638,10 @@ export default function Home() {
                         </IconContext.Provider>
                       </a>
                     </div>
+
+                    <p className="my-1 font-normal dark:text-gray-300 text-base max-w-3xl">
+                      {project.description}
+                    </p>
 
                     <div className="flex flex-wrap flex-row justify-start mt-2">
                       {project.technologies.map((t, y) => {
