@@ -1,23 +1,9 @@
 {
-  "auth": {
-    "pitggcc4c00e8": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
   "hosting": {
     "amplifyhosting": {
       "service": "amplifyhosting",
       "providerPlugin": "awscloudformation",
       "type": "manual"
-    }
-  },
-  "storage": {
-    "storage": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
     }
   }
 }

@@ -1,8 +1,10 @@
 import Head from "next/head";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import { Storage } from "aws-amplify";
-import format from "date-fns/format";
+import { format, parseISO, toDate } from "date-fns";
+import nl from "date-fns/locale/nl";
 import Toggle from "react-toggle";
 import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
@@ -12,11 +14,13 @@ import { randomHue } from "../components/constants";
 import NivoLine from "../components/NivoLine";
 import NivoBar from "../components/NivoBar";
 
+import img from "../public/peter.jpg";
+
 const WORK_HISTORY = [
   {
     name: "Fearless Apps",
     website: "http://fearless.gg",
-    begin_date: "7-1-2017",
+    begin_date: new Date("2017/7/1"),
     end_date: false,
     position: "Co-founder",
     languages: [
@@ -83,7 +87,7 @@ const WORK_HISTORY = [
   {
     name: "Purple Creative Innovators",
     website: "https://purple.nl",
-    begin_date: "3-1-2020",
+    begin_date: new Date("2020/3/1"),
     end_date: false,
     position: "React Native Developer",
     languages: [
@@ -142,8 +146,8 @@ const WORK_HISTORY = [
   {
     name: "Holland Financial Business Group",
     website: "https://hfbg.nl",
-    begin_date: "8-1-2018",
-    end_date: "2-1-2020",
+    begin_date: new Date("2018/8/1"),
+    end_date: new Date("2020/2/1"),
     position: "React Native Developer",
     languages: [
       "HTML",
@@ -178,8 +182,8 @@ const WORK_HISTORY = [
   {
     name: "SkillsTown",
     website: "https://skillstown.nl",
-    begin_date: "12-1-2017",
-    end_date: "7-1-2019",
+    begin_date: new Date("2017/12/1"),
+    end_date: new Date("2019/7/1"),
     position: "React Native Developer",
     languages: [
       "HTML",
@@ -210,8 +214,8 @@ const WORK_HISTORY = [
   {
     name: "Software Skills",
     website: "https://softwareskills.se",
-    begin_date: "12-1-2015",
-    end_date: "6-1-2017",
+    begin_date: new Date("2015/12/1"),
+    end_date: new Date("2017/6/1"),
     position: "Webdeveloper",
     languages: ["HTML", "CSS", "JavaScript"],
     technologies: [
@@ -224,8 +228,8 @@ const WORK_HISTORY = [
   {
     name: "Tim online",
     website: "https://tim-online.nl/",
-    begin_date: "2-1-2014",
-    end_date: "6-1-2014",
+    begin_date: new Date("2014/2/1"),
+    end_date: new Date("2014/6/1"),
     position: "Intern Webdeveloper",
     languages: ["HTML", "CSS", "JavaScript"],
     technologies: [
@@ -238,8 +242,8 @@ const WORK_HISTORY = [
   {
     name: "Dutch Didit",
     website: false,
-    begin_date: "7-1-2011",
-    end_date: "3-1-2012",
+    begin_date: new Date("2011/7/1"),
+    end_date: new Date("2012/3/1"),
     position: "Multimedia designer",
     languages: false,
     technologies: [
@@ -334,7 +338,13 @@ export default function Home() {
       <div className="flex flex-1 justify-start align-center flex-col">
         <div className="flex justify-start flex-col sm:px-10 px-5 pb-2">
           <div className="flex py-5">
-            <img src="/peter.jpg" alt="Peter" height="150" width="150" />
+            <img
+              src={img}
+              alt="Peter"
+              height="150"
+              width="150"
+              style={{ height: 150, width: 150 }}
+            />
           </div>
           <h1 className="dark:text-white text-3xl font-display pb-2">About</h1>
           <p className="dark:text-white text-m font-sans max-w-lg leading-8">
@@ -387,9 +397,6 @@ export default function Home() {
           </h1>
           <div className="">
             {WORK_HISTORY.map((work, i) => {
-              let beginDate = format(new Date(work.begin_date), "LLLL yyyy");
-              let endDate = work.end_date ? new Date(work.end_date) : false;
-              if (endDate) endDate = format(endDate, "LLLL yyyy");
               return (
                 <div
                   key={`work-${i}`}
@@ -397,10 +404,16 @@ export default function Home() {
                 >
                   <h1 className="font-semibold dark:text-white">{work.name}</h1>
                   <p className="">
-                    <small className="dark:text-white">{beginDate}</small>
+                    <small className="dark:text-white">
+                      {`${format(work.begin_date, "LLLL yyyy")}`}
+                    </small>
                     <small className="dark:text-white"> - </small>
                     <small className="dark:text-white">
-                      {endDate ? endDate : "now"}
+                      {`${
+                        work.end_date
+                          ? format(work.end_date, "LLLL yyyy")
+                          : "now"
+                      }`}
                     </small>
                   </p>
                   <div className="flex flex-wrap flex-row justify-start mt-2">

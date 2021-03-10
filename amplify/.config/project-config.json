@@ -1,18 +1,17 @@
 {
-  "providers": [
-    "awscloudformation"
-  ],
-  "projectName": "pitgg",
+  "projectName": "petervanegeraat",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
     "framework": "react",
     "config": {
       "SourceDir": ".",
-      "DistributionDir": ".next",
+      "DistributionDir": "out",
       "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start",
-      "ServerlessContainers": false
+      "StartCommand": "npm run-script start"
     }
-  }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
 }

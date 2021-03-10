@@ -1,26 +1,23 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-pitgg-dev-20107-authRole",
-      "UnauthRoleArn": "arn:aws:iam::897517238696:role/amplify-pitgg-dev-20107-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::897517238696:role/amplify-pitgg-dev-20107-authRole",
-      "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-pitgg-dev-20107-deployment",
-      "UnauthRoleName": "amplify-pitgg-dev-20107-unauthRole",
-      "StackName": "amplify-pitgg-dev-20107",
-      "StackId": "arn:aws:cloudformation:eu-central-1:897517238696:stack/amplify-pitgg-dev-20107/6f8f4520-7e17-11eb-af75-0abaa2279058",
-      "AmplifyAppId": "di9r2xx7jccd"
-    },
-    "categories": {
-      "auth": {
-        "pitggcc4c00e8": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "di9r2xx7jccd",
-          "type": "manual"
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-petervanegeraat-prod-171545-authRole",
+            "UnauthRoleArn": "arn:aws:iam::897517238696:role/amplify-petervanegeraat-prod-171545-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::897517238696:role/amplify-petervanegeraat-prod-171545-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "amplify-petervanegeraat-prod-171545-deployment",
+            "UnauthRoleName": "amplify-petervanegeraat-prod-171545-unauthRole",
+            "StackName": "amplify-petervanegeraat-prod-171545",
+            "StackId": "arn:aws:cloudformation:eu-central-1:897517238696:stack/amplify-petervanegeraat-prod-171545/df303cc0-81bb-11eb-adda-06536e2d64cc",
+            "AmplifyAppId": "d3qlc0zd7fk8ea"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d3qlc0zd7fk8ea",
+                    "type": "manual"
+                }
+            }
         }
-      }
     }
-  }
 }
