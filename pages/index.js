@@ -18,7 +18,9 @@ import img from "../public/peter.jpg";
 const WORK_HISTORY = [
   {
     name: "Fearless Apps",
-    website: "http://fearless.gg",
+    description:
+      "Fullstack application development company (VOF) founded by Luuk & Peter van Egeraat.",
+    website: "http://fearless.gg/apps",
     begin_date: new Date("2017/7/1"),
     end_date: false,
     position: "Co-founder",
@@ -65,26 +67,28 @@ const WORK_HISTORY = [
         name: "Tailwind",
         website: "https://tailwindcss.com/",
       },
-      {
-        name: "Photoshop",
-        website: "https://adobe.com",
-      },
-      {
-        name: "Illustrator",
-        website: "https://adobe.com",
-      },
-      {
-        name: "InDesign",
-        website: "https://adobe.com",
-      },
-      {
-        name: "Sketch",
-        website: "https://www.sketch.com/",
-      },
+      // {
+      //   name: "Photoshop",
+      //   website: "https://adobe.com",
+      // },
+      // {
+      //   name: "Illustrator",
+      //   website: "https://adobe.com",
+      // },
+      // {
+      //   name: "InDesign",
+      //   website: "https://adobe.com",
+      // },
+      // {
+      //   name: "Sketch",
+      //   website: "https://www.sketch.com/",
+      // },
     ],
   },
   {
     name: "Purple Creative Innovators",
+    description:
+      "Maintaining two applications in production on App store and Google Play. Building applications to automate internal processes.",
     website: "https://purple.nl",
     begin_date: new Date("2020/3/1"),
     end_date: false,
@@ -100,6 +104,7 @@ const WORK_HISTORY = [
       "Java",
       "CocoaPods",
       "Gradle",
+      "SQL",
       "NodeJS",
       "GraphQL",
       "AWS S3",
@@ -134,16 +139,14 @@ const WORK_HISTORY = [
       },
       {
         name: "Tailwind",
-        website: "https://aws.amazon.com/amplify/",
-      },
-      {
-        name: "Sketch",
-        website: "https://www.sketch.com/",
+        website: "https://tailwindcss.com/",
       },
     ],
   },
   {
     name: "Holland Financial Business Group",
+    description:
+      "Worked on building a Multifactor Authentication app to improve the security of their products.",
     website: "https://hfbg.nl",
     begin_date: new Date("2018/8/1"),
     end_date: new Date("2020/2/1"),
@@ -172,14 +175,11 @@ const WORK_HISTORY = [
         name: "Emotion",
         website: "https://emotion.sh/",
       },
-      {
-        name: "Sketch",
-        website: "https://www.sketch.com/",
-      },
     ],
   },
   {
     name: "SkillsTown",
+    description: "Worked on camera and video applications.",
     website: "https://skillstown.nl",
     begin_date: new Date("2017/12/1"),
     end_date: new Date("2019/7/1"),
@@ -212,6 +212,8 @@ const WORK_HISTORY = [
   },
   {
     name: "Software Skills",
+    description:
+      "Worked (including abroad for 3 months) on a web tool for applicants and companies to make the hiring process easier and more efficient by providing tests.",
     website: "https://softwareskills.se",
     begin_date: new Date("2015/12/1"),
     end_date: new Date("2017/6/1"),
@@ -226,6 +228,8 @@ const WORK_HISTORY = [
   },
   {
     name: "Tim online",
+    description:
+      "I started with programming at Tim online by developing a paralax website and a puzzle game.",
     website: "https://tim-online.nl/",
     begin_date: new Date("2014/2/1"),
     end_date: new Date("2014/6/1"),
@@ -240,6 +244,8 @@ const WORK_HISTORY = [
   },
   {
     name: "Dutch Didit",
+    description:
+      "I designed the visuals of a predication game with leader boards, monthly prizes, scores, questions and answers. This app was later sold to a leading Dutch news paper.",
     website: false,
     begin_date: new Date("2011/7/1"),
     end_date: new Date("2012/3/1"),
@@ -313,10 +319,6 @@ const PROJECTS = [
         name: "AWS Amplify",
         website: "https://aws.amazon.com/amplify/",
       },
-      {
-        name: "Sketch",
-        website: "https://www.sketch.com/",
-      },
     ],
   },
   {
@@ -347,8 +349,8 @@ const PROJECTS = [
         website: "https://aws.amazon.com/amplify/",
       },
       {
-        name: "Sketch",
-        website: "https://www.sketch.com/",
+        name: "Tailwind",
+        website: "https://tailwindcss.com/",
       },
     ],
   },
@@ -497,34 +499,31 @@ export default function Home() {
                     <a
                       target="_blank"
                       href={work.website}
-                      className="font-medium dark:text-white text-xl my-0 underline"
+                      className="font-light dark:text-white text-xl my-0 underline"
                     >
                       {work.name}
                     </a>
                   ) : (
                     <span
                       target="_blank"
-                      className="font-semibold dark:text-white text-xl my-0"
+                      className="font-light dark:text-white text-xl my-0"
                     >
                       {work.name}
                     </span>
                   )}
-                  <p className="my-1">
-                    <small className="font-light dark:text-gray-300 text-sm mr-2">
+                  <p className="my-1 font-light text-sm dark:text-gray-600 flex align-center">
+                    <small className="text-sm mr-2 dark:text-gray-400">
                       {work.position}
                     </small>
-                    <small className="dark:text-gray-500">
-                      ({`${format(work.begin_date, "LLLL yyyy")}`}
+                    <small>{`${format(work.begin_date, "LLLL yyyy")}`}</small>
+                    <small>
+                      {work.end_date
+                        ? ` - ${format(work.end_date, "LLLL yyyy")}`
+                        : ""}
                     </small>
-                    <small className="dark:text-gray-500"> - </small>
-                    <small className="dark:text-gray-500">
-                      {`${
-                        work.end_date
-                          ? format(work.end_date, "LLLL yyyy")
-                          : "now"
-                      }`}
-                      )
-                    </small>
+                  </p>
+                  <p className="my-1 font-normal dark:text-gray-300 text-base max-w-3xl">
+                    {work.description}
                   </p>
                   <div className="flex flex-wrap flex-row justify-start mt-2">
                     {work.technologies.map((t, y) => {
@@ -567,7 +566,7 @@ export default function Home() {
                 return (
                   <div
                     key={`work-${i}`}
-                    className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
+                    className="border-l-2 pl-5 border-gray-800 dark:border-gray-400 mb-10"
                   >
                     <h1 className="font-semibold dark:text-white">
                       {work.name}
@@ -599,7 +598,7 @@ export default function Home() {
                 return (
                   <div
                     key={`work-${i}`}
-                    className="border-l-2 pl-5 border-gray-800 dark:border-white mb-10"
+                    className="border-l-2 pl-5 border-gray-800 dark:border-gray-400 mb-10"
                   >
                     <div className="flex flex-wrap">
                       <h1 className="font-semibold dark:text-white">
