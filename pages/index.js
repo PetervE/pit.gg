@@ -393,33 +393,38 @@ export default function Home() {
       </Head>
 
       <nav className="flex flex-grow-0 bg-white dark:bg-gray-600 justify-end sm:py-10 py-5">
-        <div className="flex flex-1">
-          <h1 className="dark:text-white text-xl font-mono sm:px-10 px-5">
+        <div className="flex flex-0 flex-col sm:px-10 pl-5 pr-3">
+          <h1 className="dark:text-white text-2xl font-display">
             Peter van Egeraat
           </h1>
+          <span className="dark:text-white text-l font-body">
+            Software Engineer
+          </span>
         </div>
-        <div className="flex flex-0 sm:px-10 px-5">
-          <Toggle
-            className="h-5"
-            defaultChecked={darkModeActive}
-            icons={{
-              checked: (
-                <IconContext.Provider value={{ color: "white" }}>
-                  <div className="h-5">
-                    <FaMoon />
-                  </div>
-                </IconContext.Provider>
-              ),
-              unchecked: (
-                <IconContext.Provider value={{ color: "#fbbf24" }}>
-                  <div className="h-5">
-                    <FaSun />
-                  </div>
-                </IconContext.Provider>
-              ),
-            }}
-            onChange={toggleColorMode}
-          />
+        <div className="flex flex-1 sm:px-10 justify-center align-center items-center">
+          <div className="flex flex-shrink">
+            <Toggle
+              className="h-5"
+              defaultChecked={darkModeActive}
+              icons={{
+                checked: (
+                  <IconContext.Provider value={{ color: "white" }}>
+                    <div className="h-5">
+                      <FaMoon />
+                    </div>
+                  </IconContext.Provider>
+                ),
+                unchecked: (
+                  <IconContext.Provider value={{ color: "#fbbf24" }}>
+                    <div className="h-5">
+                      <FaSun />
+                    </div>
+                  </IconContext.Provider>
+                ),
+              }}
+              onChange={toggleColorMode}
+            />
+          </div>
         </div>
       </nav>
 
