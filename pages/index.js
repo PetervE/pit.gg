@@ -311,10 +311,6 @@ const PROJECTS = [
     ],
     technologies: [
       {
-        name: "React",
-        website: "https://reactjs.org",
-      },
-      {
         name: "React Native",
         website: "https://reactnative.dev",
       },
