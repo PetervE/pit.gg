@@ -1,0 +1,238 @@
+[
+   {
+      "name": "Fearless Apps",
+      "description": "Fullstack application development company (VOF) founded by Luuk & Peter van Egeraat.",
+      "website": "http://fearless.gg/apps",
+      "begin_date": "2017/7/1",
+      "end_date": false,
+      "position": "Co-founder",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript",
+         "TypeScript",
+         "Swift",
+         "Kotlin",
+         "Objective-C",
+         "Java",
+         "CocoaPods",
+         "Gradle",
+         "NodeJS",
+         "GraphQL",
+         "AWS S3",
+         "AWS DynamoDB",
+         "AWS Cognito",
+         "AWS Lambda"
+      ],
+      "technologies": [
+         {
+            "name": "React",
+            "website": "https://reactjs.org"
+         },
+         {
+            "name": "NextJS",
+            "website": "https://nextjs.org/"
+         },
+         {
+            "name": "React Native",
+            "website": "https://reactnative.dev"
+         },
+         {
+            "name": "Expo",
+            "website": "https://expo.io/"
+         },
+         {
+            "name": "AWS Amplify",
+            "website": "https://aws.amazon.com/amplify/"
+         },
+         {
+            "name": "Tailwind",
+            "website": "https://tailwindcss.com/"
+         }
+      ]
+   },
+   {
+      "name": "Purple Creative Innovators",
+      "description": "Maintaining two applications in production on App store and Google Play. Building applications to automate internal processes.",
+      "website": "https://purple.nl",
+      "begin_date": "2020/3/1",
+      "end_date": false,
+      "position": "React Native Developer",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript",
+         "TypeScript",
+         "Swift",
+         "Kotlin",
+         "Objective-C",
+         "Java",
+         "CocoaPods",
+         "Gradle",
+         "SQL",
+         "NodeJS",
+         "GraphQL",
+         "AWS S3",
+         "AWS DynamoDB",
+         "AWS Cognito",
+         "AWS Lambda"
+      ],
+      "technologies": [
+         {
+            "name": "React",
+            "website": "https://reactjs.org"
+         },
+         {
+            "name": "NextJS",
+            "website": "https://nextjs.org/"
+         },
+         {
+            "name": "React Native",
+            "website": "https://reactnative.dev"
+         },
+         {
+            "name": "Expo",
+            "website": "https://expo.io/"
+         },
+         {
+            "name": "AWS Amplify",
+            "website": "https://aws.amazon.com/amplify/"
+         },
+         {
+            "name": "ExpressJS",
+            "website": "https://expressjs.com/"
+         },
+         {
+            "name": "Tailwind",
+            "website": "https://tailwindcss.com/"
+         }
+      ]
+   },
+   {
+      "name": "Holland Financial Business Group",
+      "description": "Worked on a Multifactor Authentication (MFA) app to improve the security of their products.",
+      "website": "https://hfbg.nl",
+      "begin_date": "2018/8/1",
+      "end_date": "2020/2/1",
+      "position": "React Native Developer",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript",
+         "Swift",
+         "Kotlin",
+         "Objective-C",
+         "Java",
+         "CocoaPods",
+         "Gradle"
+      ],
+      "technologies": [
+         {
+            "name": "React",
+            "website": "https://reactjs.org"
+         },
+         {
+            "name": "React Native",
+            "website": "https://reactnative.dev"
+         },
+         {
+            "name": "Emotion",
+            "website": "https://emotion.sh/"
+         }
+      ]
+   },
+   {
+      "name": "SkillsTown",
+      "description": "Worked on camera and video applications.",
+      "website": "https://skillstown.nl",
+      "begin_date": "2017/12/1",
+      "end_date": "2019/7/1",
+      "position": "React Native Developer",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript",
+         "Swift",
+         "Kotlin",
+         "Objective-C",
+         "Java",
+         "CocoaPods",
+         "Gradle"
+      ],
+      "technologies": [
+         {
+            "name": "React",
+            "website": "https://reactjs.org"
+         },
+         {
+            "name": "React Native",
+            "website": "https://reactnative.dev"
+         },
+         {
+            "name": "Styled Components",
+            "website": "https://styled-components.com/"
+         }
+      ]
+   },
+   {
+      "name": "Software Skills",
+      "description": "Worked (including abroad for 3 months) on a web tool for applicants and companies to make the hiring process easier and more efficient by providing tests.",
+      "website": "https://softwareskills.se",
+      "begin_date": "2015/12/1",
+      "end_date": "2017/6/1",
+      "position": "Webdeveloper",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript"
+      ],
+      "technologies": [
+         {
+            "name": "Angular",
+            "website": "https://angularjs.org"
+         }
+      ]
+   },
+   {
+      "name": "Tim online",
+      "description": "I started with programming at Tim online by developing a paralax website and a puzzle game.",
+      "website": "https://tim-online.nl/",
+      "begin_date": "2014/2/1",
+      "end_date": "2014/6/1",
+      "position": "Intern Webdeveloper",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript"
+      ],
+      "technologies": [
+         {
+            "name": "Angular",
+            "website": "https://angularjs.org"
+         }
+      ]
+   },
+   {
+      "name": "Dutch Didit",
+      "description": "I designed the visuals of a predication game with leader boards, monthly prizes, scores, questions and answers. This app was later sold to a leading Dutch news paper.",
+      "website": false,
+      "begin_date": "2011/7/1",
+      "end_date": "2012/3/1",
+      "position": "Multimedia designer",
+      "languages": false,
+      "technologies": [
+         {
+            "name": "Photoshop",
+            "website": "https://adobe.com"
+         },
+         {
+            "name": "Illustrator",
+            "website": "https://adobe.com"
+         },
+         {
+            "name": "InDesign",
+            "website": "https://adobe.com"
+         }
+      ]
+   }
+]
