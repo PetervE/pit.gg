@@ -6,7 +6,8 @@ import "../styles/globals.css";
 import { format, parseISO, toDate } from "date-fns";
 import nl from "date-fns/locale/nl";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Loader from "../components/Loader";
 import Head from "next/head";
 import Link from "next/link";
 import Toggle from "react-toggle";
@@ -16,15 +17,19 @@ import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function MyApp({ Component, pageProps }) {
-  const [darkModeActive, setDarkModeActive] = useState(null);
+  const [darkModeActive, setDarkModeActive] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     checkLocalStorage();
-    return () => {};
+    return () => {
+      setLoading(true);
+    };
   }, []);
 
   const checkLocalStorage = () => {
     let status = localStorage.getItem("theme");
+
     if (status === "light") {
       document.documentElement.classList.remove("dark");
       setDarkModeActive(false);
@@ -32,6 +37,7 @@ function MyApp({ Component, pageProps }) {
       document.documentElement.classList.add("dark");
       setDarkModeActive(true);
     }
+    setLoading(false);
   };
 
   const toggleColorMode = () => {
@@ -46,7 +52,9 @@ function MyApp({ Component, pageProps }) {
     }
   };
 
-  if (darkModeActive === null) return null;
+  if (loading) {
+    return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
+  }
 
   return (
     <div className="min-h-screen flex flex-1 flex-col bg-white dark:bg-white dark:bg-gray-800">

@@ -1,11 +1,11 @@
 import "../../components/configure";
 import { format, formatDistance, formatRelative, subDays } from "date-fns";
-import { useEffect, useState } from "react";
 import { Storage } from "aws-amplify";
 import Select from "react-select";
 
+import React, { useEffect, useState } from "react";
+import Loader from "../../components/Loader";
 import { randomHue } from "../../components/constants";
-
 import NivoBar from "../../components/NivoBar";
 
 export default function Fitness({ darkModeActive }) {
@@ -51,10 +51,14 @@ export default function Fitness({ darkModeActive }) {
         });
         return memo;
       }, {});
+
       setExercises(final);
 
       let active = Object.keys(final)[0];
-      setActiveExercise({ value: active, label: active.replaceAll("-", " ") });
+      setActiveExercise({
+        value: active,
+        label: active.replaceAll("-", " "),
+      });
     } catch (err) {
       console.log(err);
     }
@@ -103,6 +107,7 @@ export default function Fitness({ darkModeActive }) {
       }
       return memo;
     }, []);
+
     setWorkoutData(final);
   };
 
@@ -110,7 +115,9 @@ export default function Fitness({ darkModeActive }) {
     setActiveExercise(e);
   };
 
-  if (!exercises || !activeExercise) return null;
+  if (!exercises || !activeExercise) {
+    return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
+  }
 
   return (
     <div>

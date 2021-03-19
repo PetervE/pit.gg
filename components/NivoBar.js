@@ -1,3 +1,4 @@
+import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 
 export default function NivoBar(props) {
@@ -28,7 +29,18 @@ export default function NivoBar(props) {
           },
         },
       }}
-      keys={["set 1", "set 2", "set 3", "set 4", "set 5", "set 6", "set 7", "set 8", "set 9", "set 10"]}
+      keys={[
+        "set 1",
+        "set 2",
+        "set 3",
+        "set 4",
+        "set 5",
+        "set 6",
+        "set 7",
+        "set 8",
+        "set 9",
+        "set 10",
+      ]}
       indexBy="date"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
