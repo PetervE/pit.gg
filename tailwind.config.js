@@ -15,5 +15,5 @@ module.exports = {
       textOpacity: ["dark"],
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-hamburgers")],
 };
