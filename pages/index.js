@@ -23,7 +23,7 @@ export default function Home(props) {
   if (loading) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
-
+console.log("home page", props);
   return (
     <div className="flex flex-1 justify-center items-center flex-col py-2">
       <div className="flex flex-0">

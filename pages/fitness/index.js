@@ -8,13 +8,13 @@ import NivoBar from "../../components/NivoBar";
 
 export default function Fitness(props) {
   const { setStore, darkModeActive, gymLogs } = props;
-
+  
   const [workouts, setWorkouts] = useState(false);
   const [exercises, setExercises] = useState(false);
   const [activeExercise, setActiveExercise] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [workoutData, setWorkoutData] = useState(false);
 
-  const [workoutData, setWorkoutData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   function randomRgbaString(alpha) {
     let r = Math.floor(Math.random() * 255);
@@ -34,11 +34,21 @@ export default function Fitness(props) {
       const data = await raw.json();
       setStore({ key: "gymLogs", value: data });
     }
+    const data = gymLogs.workouts || data.workouts || false;
+    handleWorkouts(data);
+  };
 
-    const workouts = gymLogs.workouts || data.workouts || false;
-    setWorkouts(workouts);
+  useEffect(() => {
+    if (workouts) drawGraph();
+  }, [activeExercise]);
 
-    const exerciseList = workouts.reduce((memo, workout) => {
+  useEffect(() => {
+    if (loading) setLoading(false);
+  }, [workoutData]);
+
+  const handleWorkouts = (data) => {
+    if (!workouts) setWorkouts(data);
+    const exerciseList = data.reduce((memo, workout) => {
       workout.exercises.map((e) => {
         memo[e.type] = memo[e.type] || [];
         memo[e.type].push(e);
@@ -46,17 +56,12 @@ export default function Fitness(props) {
       return memo;
     }, {});
     setExercises(exerciseList);
-
     let active = Object.keys(exerciseList)[0];
     setActiveExercise({
       value: active,
       label: active.replaceAll("-", " "),
     });
   };
-
-  useEffect(() => {
-    if (workouts) drawGraph();
-  }, [activeExercise]);
 
   const drawGraph = () => {
     let colors = {
@@ -103,7 +108,6 @@ export default function Fitness(props) {
     }, []);
 
     setWorkoutData(final);
-    setLoading(false);
   };
 
   const changeExercise = (e) => {
@@ -113,7 +117,7 @@ export default function Fitness(props) {
   if (loading) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
-
+  console.log("fitness page", props);
   return (
     <div>
       <header className="flex flex-grow-0 justify-center">
