@@ -1,6 +1,4 @@
-import "../../components/configure";
 import { format, formatDistance, formatRelative, subDays } from "date-fns";
-import { Storage } from "aws-amplify";
 import Select from "react-select";
 
 import React, { useEffect, useState } from "react";
@@ -25,47 +23,34 @@ export default function Fitness({ darkModeActive }) {
   }
 
   useEffect(() => {
-    getLiftLogs();
-    return () => {};
+    init();
   }, []);
+
+  const init = async () => {
+    const raw = await fetch("/api/amplify/fitness");
+    const data = await raw.json();
+    const { workouts } = data;
+    setWorkouts(workouts);
+
+    const exerciseList = workouts.reduce((memo, workout) => {
+      workout.exercises.map((e) => {
+        memo[e.type] = memo[e.type] || [];
+        memo[e.type].push(e);
+      });
+      return memo;
+    }, {});
+    setExercises(exerciseList);
+
+    let active = Object.keys(exerciseList)[0];
+    setActiveExercise({
+      value: active,
+      label: active.replaceAll("-", " "),
+    });
+  };
 
   useEffect(() => {
     if (workouts) drawGraph();
   }, [activeExercise]);
-
-  // get workouts, excercises and set active exercise
-  const getLiftLogs = async () => {
-    try {
-      const logs = await Storage.get(
-        "fitness/logs/fithero-backup-2021-03-19.json",
-        {
-          download: true,
-        }
-      );
-      const value = await new Response(logs.Body).json();
-      setWorkouts(value.workouts || []);
-
-      const final = value.workouts.reduce((memo, workout) => {
-        workout.exercises.map((e) => {
-          memo[e.type] = memo[e.type] || [];
-          memo[e.type].push(e);
-        });
-        return memo;
-      }, {});
-
-      setExercises(final);
-
-      let active = Object.keys(final)[0];
-      setActiveExercise({
-        value: active,
-        label: active.replaceAll("-", " "),
-      });
-
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const drawGraph = () => {
     let colors = {
@@ -112,6 +97,7 @@ export default function Fitness({ darkModeActive }) {
     }, []);
 
     setWorkoutData(final);
+    setLoading(false);
   };
 
   const changeExercise = (e) => {

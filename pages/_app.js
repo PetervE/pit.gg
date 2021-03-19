@@ -52,10 +52,6 @@ function MyApp({ Component, pageProps }) {
     }
   };
 
-  if (loading) {
-    return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
-  }
-
   return (
     <div className="min-h-screen flex flex-1 flex-col bg-white dark:bg-white dark:bg-gray-800">
       <Head>

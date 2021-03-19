@@ -7,8 +7,17 @@ export default function Home({ darkModeActive }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(false);
+    init();
   }, []);
+
+  const init = async () => {
+    const raw = await fetch("/api/amplify/fitness");
+    const data = await raw.json();
+    const { workouts } = data;
+    console.log("INIT", data);
+
+    setLoading(false);
+  };
 
   if (loading) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
