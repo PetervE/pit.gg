@@ -14,11 +14,13 @@ export default function Loader({ darkModeActive, fullscreen }) {
           disabled
         >
           <svg
-            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            className={`animate-spin -ml-1 mr-3 h-5 w-5 ${
+              darkModeActive ? "text-white" : "text-black"
+            }`}
             viewBox="0 0 24 24"
           >
             <circle
-              className="opacity-25"
+              className={`opacity-${darkModeActive ? "25" : "0"}`}
               cx="12"
               cy="12"
               r="10"

@@ -15,13 +15,15 @@ export default function Home({ darkModeActive }) {
   }
 
   return (
-    <div className="flex flex-1 justify-start align-center flex-col py-2">
-      <Link href="/resume">
-        <a>Resume</a>
-      </Link>
-      <Link href="/fitness">
-        <a>Fitness</a>
-      </Link>
+    <div className="flex flex-1 justify-center items-center flex-col py-2">
+      <div className="flex flex-0">
+        <Link href="/resume">
+          <a>Resume</a>
+        </Link>
+        <Link href="/fitness">
+          <a>Fitness</a>
+        </Link>
+      </div>
     </div>
   );
 }
