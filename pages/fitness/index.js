@@ -6,7 +6,9 @@ import Loader from "../../components/Loader";
 import { randomHue } from "../../components/constants";
 import NivoBar from "../../components/NivoBar";
 
-export default function Fitness({ darkModeActive }) {
+export default function Fitness(props) {
+  const { setStore, darkModeActive, gymLogs } = props;
+
   const [workouts, setWorkouts] = useState(false);
   const [exercises, setExercises] = useState(false);
   const [activeExercise, setActiveExercise] = useState(false);
@@ -27,9 +29,13 @@ export default function Fitness({ darkModeActive }) {
   }, []);
 
   const init = async () => {
-    const raw = await fetch("/api/amplify/fitness");
-    const data = await raw.json();
-    const { workouts } = data;
+    if (!gymLogs) {
+      const raw = await fetch("/api/amplify/fitness");
+      const data = await raw.json();
+      setStore({ key: "gymLogs", value: data });
+    }
+
+    const workouts = gymLogs.workouts || data.workouts || false;
     setWorkouts(workouts);
 
     const exerciseList = workouts.reduce((memo, workout) => {

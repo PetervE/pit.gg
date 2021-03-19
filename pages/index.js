@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import Loader from "../components/Loader";
 
-export default function Home({ darkModeActive }) {
+export default function Home(props) {
+  const { setStore, darkModeActive, gymLogs } = props;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -11,11 +12,11 @@ export default function Home({ darkModeActive }) {
   }, []);
 
   const init = async () => {
-    const raw = await fetch("/api/amplify/fitness");
-    const data = await raw.json();
-    const { workouts } = data;
-    console.log("INIT", data);
-
+    if (!gymLogs) {
+      const raw = await fetch("/api/amplify/fitness");
+      const data = await raw.json();
+      setStore({ key: "gymLogs", value: data });
+    }
     setLoading(false);
   };
 

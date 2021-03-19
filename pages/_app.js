@@ -20,7 +20,7 @@ import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function MyApp({ Component, pageProps }) {
   const storage = store((state) => state);
-  const { darkModeActive, setDarkModeActive } = storage;
+  const { setStore, darkModeActive } = storage;
 
   useEffect(() => {
     checkLocalStorage();
@@ -31,10 +31,10 @@ function MyApp({ Component, pageProps }) {
 
     if (status === "light") {
       document.documentElement.classList.remove("dark");
-      setDarkModeActive(false);
+      setStore({ key: "darkModeActive", value: false });
     } else {
       document.documentElement.classList.add("dark");
-      setDarkModeActive(true);
+      setStore({ key: "darkModeActive", value: true });
     }
   };
 
@@ -42,11 +42,11 @@ function MyApp({ Component, pageProps }) {
     if (darkModeActive) {
       localStorage.setItem("theme", "light");
       document.documentElement.classList.remove("dark");
-      setDarkModeActive(false);
+      setStore({ key: "darkModeActive", value: false });
     } else {
       localStorage.setItem("theme", "dark");
       document.documentElement.classList.add("dark");
-      setDarkModeActive(true);
+      setStore({ key: "darkModeActive", value: true });
     }
   };
 

@@ -3,8 +3,14 @@ import { persist } from "zustand/middleware";
 
 const store = create(
   persist((set) => ({
+    // general
+    setStore: ({ key, value }) => {
+      console.log("STORE", key, value);
+      set({ [key]: value });
+    },
     darkModeActive: true,
-    setDarkModeActive: (status) => set({ darkModeActive: status }),
+    // fitness
+    gymLogs: false,
   }))
 );
 
