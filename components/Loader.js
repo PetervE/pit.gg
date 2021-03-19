@@ -20,7 +20,7 @@ export default function Loader({ darkModeActive, fullscreen }) {
             viewBox="0 0 24 24"
           >
             <circle
-              className={`opacity-${darkModeActive ? "25" : "0"}`}
+              className="opacity-0"
               cx="12"
               cy="12"
               r="10"

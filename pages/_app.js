@@ -3,6 +3,8 @@ import "../components/configure";
 import "react-toggle/style.css";
 import "../styles/globals.css";
 
+import store from "../store";
+
 import { format, parseISO, toDate } from "date-fns";
 import nl from "date-fns/locale/nl";
 
@@ -17,14 +19,11 @@ import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function MyApp({ Component, pageProps }) {
-  const [darkModeActive, setDarkModeActive] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const storage = store((state) => state);
+  const { darkModeActive, setDarkModeActive } = storage;
 
   useEffect(() => {
     checkLocalStorage();
-    return () => {
-      setLoading(true);
-    };
   }, []);
 
   const checkLocalStorage = () => {
@@ -37,7 +36,6 @@ function MyApp({ Component, pageProps }) {
       document.documentElement.classList.add("dark");
       setDarkModeActive(true);
     }
-    setLoading(false);
   };
 
   const toggleColorMode = () => {
@@ -97,7 +95,7 @@ function MyApp({ Component, pageProps }) {
         </div>
       </nav>
       <div className="flex flex-1 justify-start align-center flex-col">
-        <Component {...pageProps} darkModeActive={darkModeActive} />
+        <Component {...pageProps} {...storage} />
       </div>
     </div>
   );
