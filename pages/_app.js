@@ -1,9 +1,7 @@
+import "../components/configure";
+
 import "react-toggle/style.css";
 import "../styles/globals.css";
-
-import Amplify from "aws-amplify";
-import awsconfig from "../aws-exports";
-Amplify.configure(awsconfig);
 
 import { format, parseISO, toDate } from "date-fns";
 import nl from "date-fns/locale/nl";
