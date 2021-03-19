@@ -12,6 +12,7 @@ export default function Fitness({ darkModeActive }) {
   const [workouts, setWorkouts] = useState(false);
   const [exercises, setExercises] = useState(false);
   const [activeExercise, setActiveExercise] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [workoutData, setWorkoutData] = useState([]);
 
@@ -59,6 +60,8 @@ export default function Fitness({ darkModeActive }) {
         value: active,
         label: active.replaceAll("-", " "),
       });
+
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -115,7 +118,7 @@ export default function Fitness({ darkModeActive }) {
     setActiveExercise(e);
   };
 
-  if (!exercises || !activeExercise) {
+  if (loading) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
 
