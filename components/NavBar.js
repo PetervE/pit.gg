@@ -21,7 +21,9 @@ export default function Navbar({ setStore, darkModeActive }) {
   };
   return (
     <>
-      <nav className="flex flex-wrap flex-col items-stretch justify-stretch px-5 navbar-expand-lg bg-gray-100 dark:bg-gray-600 justify-start py-3">
+      <nav
+        className={`flex flex-col lg:flex-row items-stretch justify-stretch px-5 navbar-expand-lg bg-gray-100 dark:bg-gray-600 justify-start py-3`}
+      >
         <Head>
           <title>Peter van Egeraat</title>
           <link rel="icon" href="/favicon.ico" />
@@ -89,7 +91,7 @@ export default function Navbar({ setStore, darkModeActive }) {
           </div>
         </div>
 
-        <div className="flex flex-0 flex-col justify-center pt-5">
+        <div className="flex flex-0 flex-col justify-center">
           <div
             className={
               "md:visible lg:flex items-center justify-center" +
