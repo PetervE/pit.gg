@@ -13,6 +13,7 @@ const store = create(
       set({ [key]: value });
     },
     darkModeActive: true,
+    user: false,
     // resume
     PROJECTS,
     EDUCATION,

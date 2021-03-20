@@ -5,7 +5,6 @@ import "../styles/globals.css";
 import store from "../store";
 
 import { format, parseISO, toDate } from "date-fns";
-import nl from "date-fns/locale/nl";
 
 import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";

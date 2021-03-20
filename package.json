@@ -8,10 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^1.0.5",
     "@nivo/bar": "^0.67.0",
     "@nivo/core": "^0.67.0",
     "@nivo/line": "^0.67.0",
-    "aws-amplify": "^3.3.22",
+    "aws-amplify": "^3.3.25",
     "date-fns": "^2.19.0",
     "imagemin-mozjpeg": "^9.0.0",
     "next": "10.0.8",

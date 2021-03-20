@@ -118,6 +118,23 @@ export default function Navbar({ setStore, darkModeActive }) {
                   </a>
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link href="/admin">
+                  <a
+                    onClick={() => setNavbarOpen(false)}
+                    className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
+                  >
+                    <i className="fab fa-facebook-square text-lg leading-lg opacity-75"></i>
+                    <span
+                      className={`ml-2 py-5 ${
+                        darkModeActive ? "text-white" : "text-black"
+                      }`}
+                    >
+                      Admin
+                    </span>
+                  </a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

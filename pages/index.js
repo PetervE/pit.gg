@@ -18,7 +18,7 @@ export default function Home(props) {
 
   const init = async () => {
     if (!gymLogs) {
-      const raw = await fetch("/api/amplify/fitness");
+      const raw = await fetch("/api/amplify/fitness/logs");
       const data = await raw.json();
       setStore({ key: "gymLogs", value: data });
     }
@@ -49,8 +49,8 @@ export default function Home(props) {
                 <div className="flex flex-wrap">
                   {w.exercises.map((e) => {
                     return (
-                      <label key={e.id} className="bg-gray-200 mr-1 mb-1 px-2 py-2">
-                        {e.type.replace("-", " ")}
+                      <label key={e.id} className="bg-gray-200 mr-1 mb-1 px-1 py-1 text-xs">
+                        {e.type.replaceAll("-", " ")}
                       </label>
                     );
                   })}

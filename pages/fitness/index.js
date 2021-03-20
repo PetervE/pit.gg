@@ -8,7 +8,7 @@ import NivoBar from "../../components/NivoBar";
 
 export default function Fitness(props) {
   const { setStore, darkModeActive, gymLogs } = props;
-  
+
   const [workouts, setWorkouts] = useState(false);
   const [exercises, setExercises] = useState(false);
   const [activeExercise, setActiveExercise] = useState(false);
@@ -29,13 +29,7 @@ export default function Fitness(props) {
   }, []);
 
   const init = async () => {
-    if (!gymLogs) {
-      const raw = await fetch("/api/amplify/fitness");
-      const data = await raw.json();
-      setStore({ key: "gymLogs", value: data });
-    }
-    const data = gymLogs.workouts || data.workouts || false;
-    handleWorkouts(data);
+    handleWorkouts();
   };
 
   useEffect(() => {
@@ -46,9 +40,9 @@ export default function Fitness(props) {
     if (loading) setLoading(false);
   }, [workoutData]);
 
-  const handleWorkouts = (data) => {
-    if (!workouts) setWorkouts(data);
-    const exerciseList = data.reduce((memo, workout) => {
+  const handleWorkouts = () => {
+    if (!workouts) setWorkouts(gymLogs.workouts);
+    const exerciseList = gymLogs.workouts.reduce((memo, workout) => {
       workout.exercises.map((e) => {
         memo[e.type] = memo[e.type] || [];
         memo[e.type].push(e);
