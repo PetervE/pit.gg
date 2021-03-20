@@ -20,6 +20,7 @@ const store = create(
     WORK_HISTORY,
     // fitness
     gymLogs: false,
+    weightliftingVideos: false,
   }))
 );
 
