@@ -93,16 +93,18 @@ export default function Navbar({ setStore, darkModeActive }) {
 
         <div className="flex flex-0 flex-col justify-center">
           <div
-            className={
-              "md:visible lg:flex items-center justify-center" +
-              (navbarOpen ? " flex" : " hidden")
-            }
+            className={`md:visible lg:flex items-center justify-center
+              ${navbarOpen ? " flex pt-5" : " hidden"}
+            `}
             id="example-navbar-danger"
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto justify-center">
               <li className="nav-item">
                 <Link href="/resume">
-                  <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75">
+                  <a
+                    onClick={() => setNavbarOpen(false)}
+                    className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
+                  >
                     <i className="fab fa-facebook-square text-lg leading-lg opacity-75"></i>
                     <span
                       className={`ml-2 py-5 ${
@@ -116,7 +118,10 @@ export default function Navbar({ setStore, darkModeActive }) {
               </li>
               <li className="nav-item">
                 <Link href="/fitness">
-                  <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75">
+                  <a
+                    onClick={() => setNavbarOpen(false)}
+                    className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
+                  >
                     <i className="fab fa-facebook-square text-lg leading-lg opacity-75"></i>
                     <span
                       className={`ml-2 py-5 ${
