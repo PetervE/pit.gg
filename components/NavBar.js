@@ -51,6 +51,7 @@ export default function Navbar({ setStore, darkModeActive }) {
                 onChange={toggleColorMode}
                 checked={darkModeActive}
                 size={60}
+                speed={2}
               />
             </div>
           </div>
