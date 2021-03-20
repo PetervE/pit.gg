@@ -45,7 +45,7 @@ export default function Navbar({ setStore, darkModeActive }) {
             </div>
           </div>
 
-          <div className="flex flex-0 flex-col px-10">
+          <div className="flex flex-0 flex-col">
             <div className="flex flex-1 items-center">
               <div>
                 <Toggle
@@ -73,7 +73,7 @@ export default function Navbar({ setStore, darkModeActive }) {
             </div>
           </div>
 
-          <div className="flex flex-0 justify-end">
+          <div className="flex flex-0 justify-end pl-5">
             <a
               className="md:visible lg:invisible"
               onClick={() => setNavbarOpen(!navbarOpen)}
