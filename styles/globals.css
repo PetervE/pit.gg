@@ -5,15 +5,3 @@
 html {
   background-color: #222222;
 }
-
-.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background-color: #1F2937;
-}
-
-.react-toggle--checked .react-toggle-track {
-  background-color: #666666;
-}
-
-.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background-color: #1F2937;
-}

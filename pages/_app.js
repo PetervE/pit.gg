@@ -1,6 +1,5 @@
 import "../components/configure";
 
-import "react-toggle/style.css";
 import "../styles/globals.css";
 
 import store from "../store";
@@ -14,7 +13,6 @@ import NavBar from "../components/NavBar";
 
 import Head from "next/head";
 import Link from "next/link";
-import Toggle from "react-toggle";
 import Select from "react-select";
 import { Storage } from "aws-amplify";
 import { IconContext } from "react-icons";

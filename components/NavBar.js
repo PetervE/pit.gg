@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Toggle from "react-toggle";
+import DarkModeToggle from "react-dark-mode-toggle";
 import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
@@ -45,49 +45,33 @@ export default function Navbar({ setStore, darkModeActive }) {
             </div>
           </div>
 
-          <div className="flex flex-0 flex-col">
-            <div className="flex flex-1 items-center">
-              <div>
-                <Toggle
-                  className="h-5"
-                  defaultChecked={darkModeActive}
-                  icons={{
-                    checked: (
-                      <IconContext.Provider value={{ color: "white" }}>
-                        <div className="h-5">
-                          <FaMoon />
-                        </div>
-                      </IconContext.Provider>
-                    ),
-                    unchecked: (
-                      <IconContext.Provider value={{ color: "#fbbf24" }}>
-                        <div className="h-5">
-                          <FaSun />
-                        </div>
-                      </IconContext.Provider>
-                    ),
-                  }}
-                  onChange={toggleColorMode}
-                />
-              </div>
+          <div className="flex flex-0 flex-col mr-5">
+            <div className="flex flex-0 items-center justify-center">
+              <DarkModeToggle
+                onChange={toggleColorMode}
+                checked={darkModeActive}
+                size={60}
+              />
             </div>
           </div>
 
-          <div className="flex flex-0 justify-end pl-5">
-            <a
-              className="md:visible lg:invisible"
-              onClick={() => setNavbarOpen(!navbarOpen)}
-            >
-              <div className="tham tham-e-squeeze tham-w-6">
-                <div className="tham-box">
-                  <div
-                    className={`tham-inner bg-${
-                      darkModeActive ? "white" : "black"
-                    }`}
-                  />
+          <div className="flex flex-0 justify-center items-center">
+            <div className="flex justify-center items-center">
+              <a
+                className="cursor-pointer flex md:visible lg:invisible w-20 h-20 justify-center items-center"
+                onClick={() => setNavbarOpen(!navbarOpen)}
+              >
+                <div className="flex tham tham-e-squeeze tham-w-6">
+                  <div className="tham-box">
+                    <div
+                      className={`tham-inner bg-${
+                        darkModeActive ? "white" : "black"
+                      }`}
+                    />
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
 
