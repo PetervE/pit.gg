@@ -23,6 +23,10 @@ function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    checkLocalStorage();
+  }, []);
+
+  useEffect(() => {
     if (darkModeActive === null) checkLocalStorage();
     if (user === null) checkUser();
 
