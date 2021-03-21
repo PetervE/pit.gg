@@ -154,7 +154,6 @@ export default function Home(props) {
     list.sort((a, b) => {
       return b.DASHBOARD_DATE - a.DASHBOARD_DATE;
     });
-    console.log("list", list);
     return list;
   };
 
@@ -183,7 +182,7 @@ export default function Home(props) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
   const list = getDashboard();
-  console.log("LIST", list);
+  // console.log("LIST", list);
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
       <div className="flex flex-wrap flex-col items-start">

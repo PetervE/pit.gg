@@ -40,7 +40,7 @@ function Tweet(props) {
 
   let userName = rt ? props.retweeted_status.user.name : props.user.name;
   let screenName = rt
-    ? props.retweeted_status.screen_name
+    ? props.retweeted_status.user.screen_name
     : props.user.screen_name;
 
   let url, image;
