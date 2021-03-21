@@ -4,10 +4,7 @@ import React, { useEffect, useState } from "react";
 import { formatDistance } from "date-fns";
 import { Auth, Storage } from "aws-amplify";
 
-const Loader = dynamic(
-  () => import("../components/Loader"),
-  { ssr: false }
-);
+const Loader = dynamic(() => import("../components/Loader"), { ssr: false });
 
 export default function Home(props) {
   const {
@@ -21,8 +18,16 @@ export default function Home(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    init();
+    // init();
+    getTweets();
   }, []);
+
+  const getTweets = async () => {
+    const raw = await fetch("/api/oauth2/twitter");
+    const data = await raw.json();
+    console.log(data);
+    // setLoading(false);
+  };
 
   const init = async () => {
     try {
