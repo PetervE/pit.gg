@@ -11,6 +11,7 @@ import EDUCATION from "../json/education.json";
 import WORK_HISTORY from "../json/work.json";
 
 import Tweet from "../components/dashboard/Tweet";
+import Post from "../components/dashboard/Post";
 
 export default function Home(props) {
   const {
@@ -92,7 +93,7 @@ export default function Home(props) {
         }
       }
 
-      if (true) {
+      if (!tweets) {
         const tweetsListRaw = await fetch("/api/oauth2/tweets");
         const tweetsList = await tweetsListRaw.json();
         setStore({
@@ -113,7 +114,7 @@ export default function Home(props) {
     blogPosts.map((b) => {
       list.push({
         ...b,
-        DASHBOARD_TYPE: "BLOG",
+        DASHBOARD_TYPE: "POST",
         DASHBOARD_DATE: new Date(b.dateAdded),
       });
     });
@@ -165,6 +166,8 @@ export default function Home(props) {
     switch (item.DASHBOARD_TYPE) {
       case "TWEET":
         return <Tweet key={id} {...item} darkModeActive={darkModeActive} />;
+      case "POST":
+        return <Post key={id} {...item} darkModeActive={darkModeActive} />;
 
       default:
         return (
@@ -180,6 +183,7 @@ export default function Home(props) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
   const list = getDashboard();
+  console.log("LIST", list);
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
       <div className="flex flex-wrap flex-col items-start">

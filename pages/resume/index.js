@@ -1,6 +1,6 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import peter from "../../public/peter.jpg";
+import peter from "../../public/images/profile.jpg";
 import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { format, parseISO, toDate } from "date-fns";

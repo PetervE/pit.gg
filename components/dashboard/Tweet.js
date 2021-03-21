@@ -50,7 +50,7 @@ function Tweet(props) {
   if (props.extended_entities && props.extended_entities.media) {
     image = props.extended_entities.media[0].media_url_https;
   }
-  console.log(text);
+
   return (
     <ConditionalLink to={url} condition={isUrl}>
       <div
