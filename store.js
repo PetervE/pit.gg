@@ -7,11 +7,11 @@ import WORK_HISTORY from "./json/work.json";
 
 const store = create(
   persist((set) => ({
-    // general
     setStore: ({ key, value }) => {
       console.log("STORE", key, value);
       set({ [key]: value });
     },
+    // general
     darkModeActive: null,
     user: null,
     // resume
