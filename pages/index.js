@@ -1,9 +1,13 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { formatDistance } from "date-fns";
 import { Auth, Storage } from "aws-amplify";
 
-import Loader from "../components/Loader";
+const Loader = dynamic(
+  () => import("../components/Loader"),
+  { ssr: false }
+);
 
 export default function Home(props) {
   const {

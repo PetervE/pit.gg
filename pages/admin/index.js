@@ -1,4 +1,5 @@
 import "../../components/configure";
+import dynamic from "next/dynamic";
 import { AmplifyAuthenticator } from "@aws-amplify/ui-react";
 import { Auth, Storage } from "aws-amplify";
 import { format, formatDistance, formatRelative, subDays } from "date-fns";
@@ -7,9 +8,10 @@ import Select from "react-select";
 
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-import Loader from "../../components/Loader";
 import { randomHue } from "../../components/constants";
 import NivoBar from "../../components/NivoBar";
+
+const Loader = dynamic(() => import("../../components/Loader"), { ssr: false });
 
 export default function Admin(props) {
   const {

@@ -1,11 +1,13 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import peter from "../../public/peter.jpg";
 import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { format, parseISO, toDate } from "date-fns";
 
 import React, { useState, useEffect } from "react";
-import Loader from "../../components/Loader";
+
+const Loader = dynamic(() => import("../../components/Loader"), { ssr: false });
 
 function Resume(props) {
   const { setStore, darkModeActive, PROJECTS, EDUCATION, WORK_HISTORY } = props;
