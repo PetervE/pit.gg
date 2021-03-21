@@ -23,6 +23,8 @@ const store = create(
     weightliftingVideos: false,
     // blog
     blogPosts: false,
+    // social
+    tweets: false,
   }))
 );
 

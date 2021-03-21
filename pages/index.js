@@ -14,20 +14,13 @@ export default function Home(props) {
     user,
     weightliftingLogs,
     weightliftingVideos,
+    tweets,
   } = props;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // init();
-    getTweets();
+    init();
   }, []);
-
-  const getTweets = async () => {
-    const raw = await fetch("/api/oauth2/twitter");
-    const data = await raw.json();
-    console.log(data);
-    // setLoading(false);
-  };
 
   const init = async () => {
     try {
@@ -91,6 +84,15 @@ export default function Home(props) {
             value: posts.data.user.publication.posts,
           });
         }
+      }
+
+      if (tweets === false) {
+        const tweetsList = await fetch("/api/oauth2/twitter");
+        const tweets = await tweetsList.json();
+        setStore({
+          key: "tweets",
+          value: tweets.data,
+        });
       }
 
       setLoading(false);
