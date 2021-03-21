@@ -27,13 +27,10 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   useEffect(() => {
-    if (darkModeActive === null) checkLocalStorage();
     if (user === null) checkUser();
-
     if (darkModeActive !== null && user !== null) {
       setLoading(false);
     }
-
     return () => {
       setLoading(true);
     };

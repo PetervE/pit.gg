@@ -31,8 +31,18 @@ export default function Admin(props) {
   const [sets, setSets] = useState(false);
 
   useEffect(() => {
+    checkUser();
     init();
   }, []);
+
+  const checkUser = async () => {
+    try {
+      const loggedUser = await Auth.currentAuthenticatedUser();
+      setStore({ key: "user", value: loggedUser || false });
+    } catch (err) {
+      setStore({ key: "user", value: false });
+    }
+  };
 
   function processStorageList(result) {
     let files = [];
