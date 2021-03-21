@@ -21,6 +21,8 @@ const store = create(
     // fitness
     gymLogs: false,
     weightliftingVideos: false,
+    // blog
+    blogPosts: false,
   }))
 );
 

@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     checkLocalStorage();
   }, []);
-
+  
   const checkLocalStorage = () => {
     let status = localStorage.getItem("theme");
 

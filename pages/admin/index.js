@@ -51,12 +51,6 @@ export default function Admin(props) {
   }
 
   const init = async () => {
-    if (!user) {
-      const loggedUser = await Auth.currentAuthenticatedUser();
-      console.log(loggedUser);
-      if (loggedUser) setStore({ key: "user", value: loggedUser });
-    }
-
     const setsList = gymLogs.workouts.reduce((memo, w) => {
       let exers = [];
       w.exercises.map(({ sets }) => {
@@ -66,22 +60,6 @@ export default function Admin(props) {
       return memo;
     }, []);
     setSets(setsList);
-
-    const videosList = await Storage.list("fitness/videos/");
-    let downloadedVideos = [];
-    await Promise.all(
-      videosList.map(async (v) => {
-        if (!v.size) return;
-        const videoUrl = await Storage.get(v.key);
-        const video = await Storage.get(v.key, {
-          download: true,
-          includeHeaders: true,
-        });
-
-        downloadedVideos.push({ ...video, S3URL: videoUrl });
-      })
-    );
-    setStore({ key: "weightliftingVideos", value: downloadedVideos });
     setLoading(false);
   };
 
