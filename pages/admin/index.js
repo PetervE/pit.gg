@@ -15,8 +15,8 @@ export default function Admin(props) {
   const {
     setStore,
     darkModeActive,
-    gymLogs,
     user,
+    weightliftingLogs,
     weightliftingVideos,
   } = props;
 
@@ -51,7 +51,7 @@ export default function Admin(props) {
   }
 
   const init = async () => {
-    const setsList = gymLogs.workouts.reduce((memo, w) => {
+    const setsList = weightliftingLogs.workouts.reduce((memo, w) => {
       let exers = [];
       w.exercises.map(({ sets }) => {
         exers.push(...sets);

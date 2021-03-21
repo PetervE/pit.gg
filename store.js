@@ -12,14 +12,14 @@ const store = create(
       console.log("STORE", key, value);
       set({ [key]: value });
     },
-    darkModeActive: true,
-    user: false,
+    darkModeActive: null,
+    user: null,
     // resume
     PROJECTS,
     EDUCATION,
     WORK_HISTORY,
     // fitness
-    gymLogs: false,
+    weightliftingLogs: false,
     weightliftingVideos: false,
     // blog
     blogPosts: false,

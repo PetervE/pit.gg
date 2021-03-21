@@ -1,11 +1,19 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { formatDistance } from "date-fns";
+import { Auth, Storage } from "aws-amplify";
 
 import Loader from "../components/Loader";
 
 export default function Home(props) {
-  const { setStore, darkModeActive, gymLogs, blogPosts, user } = props;
+  const {
+    setStore,
+    darkModeActive,
+    blogPosts,
+    user,
+    weightliftingLogs,
+    weightliftingVideos,
+  } = props;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,17 +22,13 @@ export default function Home(props) {
 
   const init = async () => {
     try {
-      if (!user) {
-        const loggedUser = await Auth.currentAuthenticatedUser();
-        console.log(loggedUser);
-        if (loggedUser) setStore({ key: "user", value: loggedUser });
-      }
-
-      if (!gymLogs) {
+      if (weightliftingLogs === false) {
         const raw = await fetch("/api/amplify/fitness/logs");
         const data = await raw.json();
-        setStore({ key: "gymLogs", value: data });
+        setStore({ key: "weightliftingLogs", value: data });
+      }
 
+      if (weightliftingVideos === false) {
         const videosList = await Storage.list("fitness/videos/");
         let downloadedVideos = [];
         await Promise.all(
@@ -42,7 +46,7 @@ export default function Home(props) {
         setStore({ key: "weightliftingVideos", value: downloadedVideos });
       }
 
-      if (true) {
+      if (blogPosts === false) {
         const postsRaw = await fetch("https://api.hashnode.com", {
           method: "POST",
           headers: {
@@ -89,11 +93,11 @@ export default function Home(props) {
   if (loading) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
-  console.log(props);
+  console.log("home", props);
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
       <div className="flex flex-wrap flex-col items-start">
-        {gymLogs.workouts
+        {weightliftingLogs.workouts
           .sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
           })

@@ -7,7 +7,12 @@ import { randomHue } from "../../components/constants";
 import NivoBar from "../../components/NivoBar";
 
 export default function Fitness(props) {
-  const { setStore, darkModeActive, gymLogs } = props;
+  const {
+    setStore,
+    darkModeActive,
+    weightLiftingLogs,
+    weightLiftingVideos,
+  } = props;
 
   const [workouts, setWorkouts] = useState(false);
   const [exercises, setExercises] = useState(false);
@@ -41,8 +46,8 @@ export default function Fitness(props) {
   }, [workoutData]);
 
   const handleWorkouts = () => {
-    if (!workouts) setWorkouts(gymLogs.workouts);
-    const exerciseList = gymLogs.workouts.reduce((memo, workout) => {
+    if (!workouts) setWorkouts(weightLiftingLogs.workouts);
+    const exerciseList = weightLiftingLogs.workouts.reduce((memo, workout) => {
       workout.exercises.map((e) => {
         memo[e.type] = memo[e.type] || [];
         memo[e.type].push(e);
