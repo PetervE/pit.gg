@@ -7,7 +7,7 @@ import { validURL } from "../constants";
 
 const Loader = dynamic(() => import("../Loader"), { ssr: false });
 
-function Employer(props) {
+function WeightliftingLog(props) {
   const { darkModeActive, coverImage, brief } = props;
   // console.log(props);
   return (
@@ -24,11 +24,11 @@ function Employer(props) {
               Peter van Egeraat
             </label>
           </div>
-          <small className="flex dark:text-white text-black">EMPLOYER</small>
+          <small className="flex dark:text-white text-black">FITNESS</small>
         </div>
       </div>
     </Link>
   );
 }
 
-export default Employer;
+export default WeightliftingLog;

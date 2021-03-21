@@ -12,6 +12,9 @@ import WORK_HISTORY from "../json/work.json";
 
 import Tweet from "../components/dashboard/Tweet";
 import Post from "../components/dashboard/Post";
+import WeightliftingLog from "../components/dashboard/WeightliftingLog";
+import Project from "../components/dashboard/Project";
+import Employer from "../components/dashboard/Employer";
 
 export default function Home(props) {
   const {
@@ -196,6 +199,19 @@ export default function Home(props) {
         return <Tweet key={id} {...item} darkModeActive={darkModeActive} />;
       case "POST":
         return <Post key={id} {...item} darkModeActive={darkModeActive} />;
+
+      case "WEIGHTLIFTING_LOG":
+        return (
+          <WeightliftingLog
+            key={id}
+            {...item}
+            darkModeActive={darkModeActive}
+          />
+        );
+      case "PROJECT":
+        return <Project key={id} {...item} darkModeActive={darkModeActive} />;
+      case "EMPLOYER":
+        return <Employer key={id} {...item} darkModeActive={darkModeActive} />;
 
       default:
         return (
