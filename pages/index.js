@@ -2,9 +2,15 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { formatDistance } from "date-fns";
-import { Auth, Storage } from "aws-amplify";
+import { Auth, label, Storage } from "aws-amplify";
 
 const Loader = dynamic(() => import("../components/Loader"), { ssr: false });
+
+import PROJECTS from "../json/projects.json";
+import EDUCATION from "../json/education.json";
+import WORK_HISTORY from "../json/work.json";
+
+import Tweet from "../components/dashboard/Tweet";
 
 export default function Home(props) {
   const {
@@ -86,12 +92,12 @@ export default function Home(props) {
         }
       }
 
-      if (tweets === false) {
-        const tweetsList = await fetch("/api/oauth2/twitter");
-        const tweets = await tweetsList.json();
+      if (true) {
+        const tweetsListRaw = await fetch("/api/oauth2/tweets");
+        const tweetsList = await tweetsListRaw.json();
         setStore({
           key: "tweets",
-          value: tweets.data,
+          value: tweetsList,
         });
       }
 
@@ -101,43 +107,85 @@ export default function Home(props) {
     }
   };
 
+  const getDashboard = () => {
+    let list = [];
+
+    blogPosts.map((b) => {
+      list.push({
+        ...b,
+        DASHBOARD_TYPE: "BLOG",
+        DASHBOARD_DATE: new Date(b.dateAdded),
+      });
+    });
+
+    tweets.map((t) => {
+      list.push({
+        ...t,
+        DASHBOARD_TYPE: "TWEET",
+        DASHBOARD_DATE: new Date(t.created_at),
+      });
+    });
+
+    weightliftingLogs.workouts.map((w) => {
+      list.push({
+        ...w,
+        DASHBOARD_TYPE: "WEIGHTLIFTING_LOG",
+        DASHBOARD_DATE: new Date(w.date),
+      });
+    });
+
+    WORK_HISTORY.map((h) => {
+      list.push({
+        ...h,
+        DASHBOARD_TYPE: "EMPLOYER",
+        DASHBOARD_DATE: new Date(h.begin_date),
+      });
+    });
+
+    PROJECTS.map((p) => {
+      list.push({
+        ...p,
+        DASHBOARD_TYPE: "PROJECT",
+        DASHBOARD_DATE: new Date(p.release_date),
+      });
+    });
+
+    list.sort((a, b) => {
+      return b.DASHBOARD_DATE - a.DASHBOARD_DATE;
+    });
+    console.log("list", list);
+    return list;
+  };
+
+  const renderDashboardItem = (item, index) => {
+    const date = formatDistance(item.DASHBOARD_DATE, new Date(), {
+      addSuffix: true,
+    });
+    const id = `item-${index}`;
+    switch (item.DASHBOARD_TYPE) {
+      case "TWEET":
+        return <Tweet key={id} {...item} darkModeActive={darkModeActive} />;
+
+      default:
+        return (
+          <div key={id}>
+            <small className="text-white">{item.DASHBOARD_TYPE}</small>
+            <label className="text-white">{date}</label>
+          </div>
+        );
+    }
+  };
+
   if (loading) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
-  console.log("home", props);
+  const list = getDashboard();
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
       <div className="flex flex-wrap flex-col items-start">
-        {weightliftingLogs.workouts
-          .sort((a, b) => {
-            return new Date(b.date) - new Date(a.date);
-          })
-          .map((w) => {
-            const date = formatDistance(new Date(w.date), new Date(), {
-              addSuffix: true,
-            });
-
-            return (
-              <div
-                key={w.id}
-                className="flex flex-wrap flex-col justify-start items-start mb-5"
-              >
-                <h1 className="dark:text-white text-black py-3">{date}</h1>
-                <div className="flex flex-wrap">
-                  {w.exercises.map((e) => {
-                    return (
-                      <label
-                        key={e.id}
-                        className="bg-gray-200 mr-1 mb-1 px-1 py-1 text-xs"
-                      >
-                        {e.type.replaceAll("-", " ")}
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+        {list.map((x, i) => {
+          return renderDashboardItem(x, i);
+        })}
       </div>
     </div>
   );

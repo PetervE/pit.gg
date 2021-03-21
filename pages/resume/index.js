@@ -7,10 +7,14 @@ import { format, parseISO, toDate } from "date-fns";
 
 import React, { useState, useEffect } from "react";
 
+import PROJECTS from "../../json/projects.json";
+import EDUCATION from "../../json/education.json";
+import WORK_HISTORY from "../../json/work.json";
+
 const Loader = dynamic(() => import("../../components/Loader"), { ssr: false });
 
 function Resume(props) {
-  const { setStore, darkModeActive, PROJECTS, EDUCATION, WORK_HISTORY } = props;
+  const { setStore, darkModeActive } = props;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

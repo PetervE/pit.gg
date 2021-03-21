@@ -1,60 +1,62 @@
 [
-  {
-     "name": "Wereldhonden",
-     "description": "Working on a native application to help stray dogs find a responsible human that takes care of them.",
-     "github": "https://github.com/PetervE/Wereldhonden",
-     "website": "https://wereldhonden.nl",
-     "languages": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "CocoaPods",
-        "Gradle",
-        "NodeJS",
-        "GraphQL",
-        "AWS S3",
-        "AWS DynamoDB",
-        "AWS Cognito",
-        "AWS Lambda"
-     ],
-     "technologies": [
-        {
-           "name": "React Native",
-           "website": "https://reactnative.dev"
-        },
-        {
-           "name": "AWS Amplify",
-           "website": "https://aws.amazon.com/amplify/"
-        }
-     ]
-  },
-  {
-     "name": "pit.gg",
-     "description": "This website.",
-     "github": "https://github.com/PetervE/pit.gg",
-     "website": "https://pit.gg",
-     "languages": [
-        "HTML",
-        "CSS",
-        "JavaScript"
-     ],
-     "technologies": [
-        {
-           "name": "React",
-           "website": "https://reactjs.org"
-        },
-        {
-           "name": "NextJS",
-           "website": "https://nextjs.org/"
-        },
-        {
-           "name": "AWS Amplify",
-           "website": "https://aws.amazon.com/amplify/"
-        },
-        {
-           "name": "Tailwind",
-           "website": "https://tailwindcss.com/"
-        }
-     ]
-  }
+   {
+      "name": "Wereldhonden",
+      "release_date": "2021/05/01",
+      "description": "Working on a native application to help stray dogs find a responsible human that takes care of them.",
+      "github": "https://github.com/PetervE/Wereldhonden",
+      "website": "https://wereldhonden.nl",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript",
+         "CocoaPods",
+         "Gradle",
+         "NodeJS",
+         "GraphQL",
+         "AWS S3",
+         "AWS DynamoDB",
+         "AWS Cognito",
+         "AWS Lambda"
+      ],
+      "technologies": [
+         {
+            "name": "React Native",
+            "website": "https://reactnative.dev"
+         },
+         {
+            "name": "AWS Amplify",
+            "website": "https://aws.amazon.com/amplify/"
+         }
+      ]
+   },
+   {
+      "name": "pit.gg",
+      "release_date": "2021/3/22",
+      "description": "This website.",
+      "github": "https://github.com/PetervE/pit.gg",
+      "website": "https://pit.gg",
+      "languages": [
+         "HTML",
+         "CSS",
+         "JavaScript"
+      ],
+      "technologies": [
+         {
+            "name": "React",
+            "website": "https://reactjs.org"
+         },
+         {
+            "name": "NextJS",
+            "website": "https://nextjs.org/"
+         },
+         {
+            "name": "AWS Amplify",
+            "website": "https://aws.amazon.com/amplify/"
+         },
+         {
+            "name": "Tailwind",
+            "website": "https://tailwindcss.com/"
+         }
+      ]
+   }
 ]
