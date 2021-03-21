@@ -10,7 +10,7 @@ export default function Fitness(props) {
   const {
     setStore,
     darkModeActive,
-    weightLiftingLogs,
+    weightliftingLogs,
     weightLiftingVideos,
   } = props;
 
@@ -30,7 +30,8 @@ export default function Fitness(props) {
   }
 
   useEffect(() => {
-    init();
+    console.log("FITNEESS", weightliftingLogs);
+    if (weightliftingLogs && weightliftingLogs.workouts) init();
   }, []);
 
   const init = async () => {
@@ -38,7 +39,7 @@ export default function Fitness(props) {
   };
 
   useEffect(() => {
-    if (workouts) drawGraph();
+    if (weightliftingLogs.workouts) drawGraph();
   }, [activeExercise]);
 
   useEffect(() => {
@@ -46,8 +47,8 @@ export default function Fitness(props) {
   }, [workoutData]);
 
   const handleWorkouts = () => {
-    if (!workouts) setWorkouts(weightLiftingLogs.workouts);
-    const exerciseList = weightLiftingLogs.workouts.reduce((memo, workout) => {
+    const exerciseList = weightliftingLogs.workouts.reduce((memo, workout) => {
+      if (!workout.exercises.length) return memo;
       workout.exercises.map((e) => {
         memo[e.type] = memo[e.type] || [];
         memo[e.type].push(e);
@@ -76,13 +77,13 @@ export default function Fitness(props) {
       set10Color: false,
     };
 
-    let workoutList = workouts.sort((a, b) => {
+    let workoutList = weightliftingLogs.workouts.sort((a, b) => {
       return new Date(a.date) - new Date(b.date);
     });
 
     let final = workoutList.reduce((memo, workout) => {
       let find = workout.exercises.find((e) => e.type === activeExercise.value);
-      if (find) {
+      if (find && find.sets.length) {
         const payload = {
           date: formatRelative(new Date(workout.date), new Date()),
         };
@@ -105,7 +106,7 @@ export default function Fitness(props) {
       }
       return memo;
     }, []);
-
+    console.log(final);
     setWorkoutData(final);
   };
 
