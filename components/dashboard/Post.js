@@ -8,7 +8,7 @@ const Loader = dynamic(() => import("../Loader"), { ssr: false });
 
 function Post(props) {
   const { darkModeActive, coverImage, brief } = props;
-  console.log(props);
+  // console.log(props);
   return (
     <Link href={`/posts/${props.slug}`}>
       <div

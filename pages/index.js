@@ -24,87 +24,116 @@ export default function Home(props) {
     tweets,
   } = props;
   const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     init();
   }, []);
 
-  const init = async () => {
+  const init = () => {
     try {
-      if (weightliftingLogs === false) {
-        const raw = await fetch("/api/amplify/fitness/logs");
-        const data = await raw.json();
-        setStore({ key: "weightliftingLogs", value: data });
-      }
+      let promise1 = getWeightLiftingLogs();
+      let promise2 = getWeightLiftingVideos();
+      let promise3 = getBlogPosts();
+      let promise4 = getTweets();
 
-      if (weightliftingVideos === false) {
-        const videosList = await Storage.list("fitness/videos/");
-        let downloadedVideos = [];
-        await Promise.all(
-          videosList.map(async (v) => {
-            if (!v.size) return;
-            const videoUrl = await Storage.get(v.key);
-            const video = await Storage.get(v.key, {
-              download: true,
-              includeHeaders: true,
-            });
-
-            downloadedVideos.push({ ...video, S3URL: videoUrl });
-          })
-        );
-        setStore({ key: "weightliftingVideos", value: downloadedVideos });
-      }
-
-      if (blogPosts === false) {
-        const postsRaw = await fetch("https://api.hashnode.com", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: process.env.hashnode,
-          },
-          body: JSON.stringify({
-            query: `query {
-              user(username:"petervanegeraat") {
-                publication {
-                  posts (page:0) {
-                    cuid
-                    slug
-                    title
-                    type
-                    popularity
-                    dateAdded
-                    dateUpdated
-                    dateFeatured
-                    brief
-                    coverImage
-                    contentMarkdown
-                  }
-                }
-              }
-            }`,
-          }),
-        });
-        const posts = await postsRaw.json();
-        if (posts && posts.data) {
-          setStore({
-            key: "blogPosts",
-            value: posts.data.user.publication.posts,
-          });
-        }
-      }
-
-      if (!tweets) {
-        const tweetsListRaw = await fetch("/api/oauth2/tweets");
-        const tweetsList = await tweetsListRaw.json();
-        setStore({
-          key: "tweets",
-          value: tweetsList,
-        });
-      }
-
-      setLoading(false);
+      Promise.all([promise1, promise2, promise3, promise4]).then((values) => {
+        setLoading(false);
+      });
     } catch (err) {
       console.log("init app error", err);
+    }
+  };
+
+  const getWeightLiftingLogs = async () => {
+    try {
+      const raw = await fetch("/api/amplify/fitness/logs");
+      let data = await raw.json();
+      let dataLogs = data || false;
+      return setStore({ key: "weightliftingLogs", value: dataLogs });
+    } catch (err) {
+      console.log("getWeightLiftingLogs", err);
+    }
+  };
+
+  const getWeightLiftingVideos = async () => {
+    try {
+      const videosList = await Storage.list("fitness/videos/");
+      let downloadedVideos = [];
+      await Promise.all(
+        videosList.map(async (v) => {
+          if (!v.size) return;
+          const videoUrl = await Storage.get(v.key);
+          const video = await Storage.get(v.key, {
+            download: true,
+            includeHeaders: true,
+          });
+
+          downloadedVideos.push({ ...video, S3URL: videoUrl });
+        })
+      );
+      downloadedVideos = downloadedVideos.length ? downloadedVideos : false;
+      return setStore({
+        key: "weightliftingVideos",
+        value: downloadedVideos,
+      });
+    } catch (err) {
+      console.log("getWeightLiftingVideos", err);
+    }
+  };
+
+  const getBlogPosts = async () => {
+    try {
+      const postsRaw = await fetch("https://api.hashnode.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: process.env.hashnode,
+        },
+        body: JSON.stringify({
+          query: `query {
+            user(username:"petervanegeraat") {
+              publication {
+                posts (page:0) {
+                  cuid
+                  slug
+                  title
+                  type
+                  popularity
+                  dateAdded
+                  dateUpdated
+                  dateFeatured
+                  brief
+                  coverImage
+                  contentMarkdown
+                }
+              }
+            }
+          }`,
+        }),
+      });
+      let postItems = await postsRaw.json();
+      let posts = postItems.data.user.publication.posts || false;
+      return setStore({
+        key: "blogPosts",
+        value: posts,
+      });
+    } catch (err) {
+      console.log("getWeightLiftingVideos", err);
+    }
+  };
+
+  const getTweets = async () => {
+    try {
+      const tweetsListRaw = await fetch("/api/oauth2/tweets");
+      let tweetsList = await tweetsListRaw.json();
+      tweetsList = tweetsList || false;
+      return setStore({
+        key: "tweets",
+        value: tweetsList,
+      });
+    } catch (err) {
+      console.log("getTweets", err);
     }
   };
 
@@ -178,7 +207,7 @@ export default function Home(props) {
     }
   };
 
-  if (loading) {
+  if (loading || busy) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
   const list = getDashboard();

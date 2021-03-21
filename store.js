@@ -11,12 +11,12 @@ const store = create(
     darkModeActive: null,
     user: null,
     // fitness
-    weightliftingLogs: false,
-    weightliftingVideos: false,
+    weightliftingLogs: null,
+    weightliftingVideos: null,
     // blog
-    blogPosts: false,
+    blogPosts: null,
     // social
-    tweets: false,
+    tweets: null,
   }))
 );
 
