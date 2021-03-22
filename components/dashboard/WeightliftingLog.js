@@ -8,8 +8,9 @@ import { validURL } from "../constants";
 const Loader = dynamic(() => import("../Loader"), { ssr: false });
 
 function WeightliftingLog(props) {
-  const { darkModeActive, coverImage, brief } = props;
-  // console.log(props);
+  const { darkModeActive, exercises } = props;
+  console.log(props);
+
   return (
     <Link href={`/posts/${props.slug}`}>
       <div
@@ -24,7 +25,28 @@ function WeightliftingLog(props) {
               Peter van Egeraat
             </label>
           </div>
-          <small className="flex dark:text-white text-black">FITNESS</small>
+          <div className="flex flex-col items-stretch">
+            {exercises.map((e, x) => {
+              return (
+                <div key={`${e.id}-${x}`} className="bg-green-400 my-1 mx-1 rounded">
+                  <h4 className="dark:text-white text-black text-left px-1 py-0.5">
+                    {e.type.replaceAll("-", " ")}
+                  </h4>
+                  {e.sets.map((s, i) => {
+                    return null;
+                    return (
+                      <label
+                        key={`${s.id}-${i}`}
+                        className="dark:text-white text-black mr-5"
+                      >
+                        {s.weight * s.reps}KG
+                      </label>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Link>

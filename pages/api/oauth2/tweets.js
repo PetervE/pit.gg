@@ -16,7 +16,7 @@ export default async (req, res) => {
       url2 +
         new URLSearchParams({
           screen_name: "petervanegeraat",
-          count: 10,
+          count: 100,
         }),
       {
         headers: {
