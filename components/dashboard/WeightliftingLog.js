@@ -12,7 +12,7 @@ const Loader = dynamic(() => import("../Loader"), { ssr: false });
 function WeightliftingLog(props) {
   const { darkModeActive, exercises } = props;
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className="mb-5">

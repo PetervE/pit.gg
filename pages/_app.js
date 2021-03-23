@@ -1,5 +1,6 @@
 import "../components/configure";
 import "../styles/globals.css";
+import "react-toggle/style.css";
 
 import store from "../store";
 
@@ -16,10 +17,7 @@ import Select from "react-select";
 import { IconContext } from "react-icons";
 import { FaMoon, FaSun, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
-const Loader = dynamic(
-  () => import("../components/Loader"),
-  { ssr: false }
-);
+const Loader = dynamic(() => import("../components/Loader"), { ssr: false });
 
 function MyApp({ Component, pageProps }) {
   const storage = store((state) => state);

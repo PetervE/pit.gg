@@ -15,6 +15,7 @@ import Post from "../components/dashboard/Post";
 import WeightliftingLog from "../components/dashboard/WeightliftingLog";
 import Project from "../components/dashboard/Project";
 import Employer from "../components/dashboard/Employer";
+import Filters from "../components/dashboard/Filters";
 
 export default function Home(props) {
   const {
@@ -28,6 +29,15 @@ export default function Home(props) {
   } = props;
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
+
+  const [tweetsActive, setTweetsActive] = useState(true);
+  const [postsActive, setPostsActive] = useState(true);
+  const [projectsActive, setProjectsActive] = useState(true);
+  const [employersActive, setEmployersActive] = useState(true);
+  const [weightliftingLogsActive, setWeightliftingLogsActive] = useState(true);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   useEffect(() => {
     init();
@@ -124,45 +134,55 @@ export default function Home(props) {
   const getDashboard = () => {
     let list = [];
 
-    blogPosts.map((b) => {
-      list.push({
-        ...b,
-        DASHBOARD_TYPE: "POST",
-        DASHBOARD_DATE: new Date(b.dateAdded),
+    if (postsActive) {
+      blogPosts.map((b) => {
+        list.push({
+          ...b,
+          DASHBOARD_TYPE: "POST",
+          DASHBOARD_DATE: new Date(b.dateAdded),
+        });
       });
-    });
+    }
 
-    tweets.map((t) => {
-      list.push({
-        ...t,
-        DASHBOARD_TYPE: "TWEET",
-        DASHBOARD_DATE: new Date(t.created_at),
+    if (tweetsActive) {
+      tweets.map((t) => {
+        list.push({
+          ...t,
+          DASHBOARD_TYPE: "TWEET",
+          DASHBOARD_DATE: new Date(t.created_at),
+        });
       });
-    });
+    }
 
-    weightliftingLogs.workouts.map((w) => {
-      list.push({
-        ...w,
-        DASHBOARD_TYPE: "WEIGHTLIFTING_LOG",
-        DASHBOARD_DATE: new Date(w.date),
+    if (weightliftingLogsActive) {
+      weightliftingLogs.workouts.map((w) => {
+        list.push({
+          ...w,
+          DASHBOARD_TYPE: "WEIGHTLIFTING_LOG",
+          DASHBOARD_DATE: new Date(w.date),
+        });
       });
-    });
+    }
 
-    // WORK_HISTORY.map((h) => {
-    //   list.push({
-    //     ...h,
-    //     DASHBOARD_TYPE: "EMPLOYER",
-    //     DASHBOARD_DATE: new Date(h.begin_date),
-    //   });
-    // });
+    if (employersActive) {
+      WORK_HISTORY.map((h) => {
+        list.push({
+          ...h,
+          DASHBOARD_TYPE: "EMPLOYER",
+          DASHBOARD_DATE: new Date(h.begin_date),
+        });
+      });
+    }
 
-    // PROJECTS.map((p) => {
-    //   list.push({
-    //     ...p,
-    //     DASHBOARD_TYPE: "PROJECT",
-    //     DASHBOARD_DATE: new Date(p.release_date),
-    //   });
-    // });
+    if (projectsActive) {
+      PROJECTS.map((p) => {
+        list.push({
+          ...p,
+          DASHBOARD_TYPE: "PROJECT",
+          DASHBOARD_DATE: new Date(p.release_date),
+        });
+      });
+    }
 
     list.sort((a, b) => {
       return b.DASHBOARD_DATE - a.DASHBOARD_DATE;
@@ -207,13 +227,26 @@ export default function Home(props) {
   if (loading || busy) {
     return <Loader fullscreen={true} darkModeActive={darkModeActive} />;
   }
+
   const list = getDashboard();
-  // console.log("LIST", list);
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
       <div className="flex flex-wrap flex-col items-stretch">
-        <div className="flex flex-col items-stretch bg-white dark:bg-white my-20">
-          <h1>Filters</h1>
+        <div className="flex flex-col items-stretch my-5">
+          <div className="flex flex-row justify-start">
+            <Filters
+              tweetsActive={tweetsActive}
+              postsActive={postsActive}
+              projectsActive={projectsActive}
+              employersActive={employersActive}
+              setTweetsActive={setTweetsActive}
+              setPostsActive={setPostsActive}
+              setProjectsActive={setProjectsActive}
+              setEmployersActive={setEmployersActive}
+              weightliftingLogsActive={weightliftingLogsActive}
+              setWeightliftingLogsActive={setWeightliftingLogsActive}
+            />
+          </div>
         </div>
         {list.map((x, i) => {
           return renderDashboardItem(x, i);
