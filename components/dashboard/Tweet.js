@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-
 import { validURL } from "../constants";
+import LogHeader from "../LogHeader";
+import { FaTwitter } from "react-icons/fa";
 
 const Loader = dynamic(() => import("../Loader"), { ssr: false });
 
@@ -50,33 +51,42 @@ function Tweet(props) {
   if (props.extended_entities && props.extended_entities.media) {
     image = props.extended_entities.media[0].media_url_https;
   }
+  console.log(props);
 
   return (
-    <ConditionalLink to={url} condition={isUrl}>
-      <div
-        className={`flex flex-wrap max-w-2xl rounded-lg py-2 px-2 ${
-          isUrl ? "dark:hover:bg-gray-900 hover:bg-blue-100" : ""
-        }`}
-      >
-        <div className="flex flex-0 pr-4 py-1 items-start">
-          <img src={profileImage} className="w-8 h-8 rounded" />
-        </div>
-        <div className="flex flex-1 flex-wrap flex-col items-start">
-          <div className="flex flex-1 flex-row items-center">
-            <label className="flex pr-3 dark:text-white text-black">
-              {userName}
-            </label>
-            <i className="flex text-xs dark:text-white text-black">
-              @{screenName}
-            </i>
+    <div className="mb-5">
+      <LogHeader
+        {...props}
+        darkModeActive={darkModeActive}
+        icon={<FaTwitter size={30} />}
+      />
+
+      <ConditionalLink to={url} condition={isUrl}>
+        <div
+          className={`flex flex-wrap max-w-2xl rounded-lg py-2 px-2 ${
+            isUrl ? "dark:hover:bg-gray-900 hover:bg-blue-100" : ""
+          }`}
+        >
+          <div className="flex flex-0 pr-4 py-1 items-start">
+            <img src={profileImage} className="w-8 h-8 rounded" />
           </div>
-          <small className="flex dark:text-white text-black">
-            {truncated ? `${text}...` : `${text}`}
-          </small>
-          {image ? <img className="w36 h-auto mt-4" src={image} /> : null}
+          <div className="flex flex-1 flex-wrap flex-col items-start">
+            <div className="flex flex-1 flex-row items-center">
+              <label className="flex pr-3 dark:text-white text-black">
+                {userName}
+              </label>
+              <i className="flex text-xs dark:text-white text-black">
+                @{screenName}
+              </i>
+            </div>
+            <small className="flex dark:text-white text-black">
+              {truncated ? `${text}...` : `${text}`}
+            </small>
+            {image ? <img className="w36 h-auto mt-4" src={image} /> : null}
+          </div>
         </div>
-      </div>
-    </ConditionalLink>
+      </ConditionalLink>
+    </div>
   );
 }
 

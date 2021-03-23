@@ -148,21 +148,21 @@ export default function Home(props) {
       });
     });
 
-    WORK_HISTORY.map((h) => {
-      list.push({
-        ...h,
-        DASHBOARD_TYPE: "EMPLOYER",
-        DASHBOARD_DATE: new Date(h.begin_date),
-      });
-    });
+    // WORK_HISTORY.map((h) => {
+    //   list.push({
+    //     ...h,
+    //     DASHBOARD_TYPE: "EMPLOYER",
+    //     DASHBOARD_DATE: new Date(h.begin_date),
+    //   });
+    // });
 
-    PROJECTS.map((p) => {
-      list.push({
-        ...p,
-        DASHBOARD_TYPE: "PROJECT",
-        DASHBOARD_DATE: new Date(p.release_date),
-      });
-    });
+    // PROJECTS.map((p) => {
+    //   list.push({
+    //     ...p,
+    //     DASHBOARD_TYPE: "PROJECT",
+    //     DASHBOARD_DATE: new Date(p.release_date),
+    //   });
+    // });
 
     list.sort((a, b) => {
       return b.DASHBOARD_DATE - a.DASHBOARD_DATE;
@@ -211,7 +211,7 @@ export default function Home(props) {
   // console.log("LIST", list);
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
-      <div className="flex flex-wrap flex-col items-start">
+      <div className="flex flex-wrap flex-col items-stretch">
         {list.map((x, i) => {
           return renderDashboardItem(x, i);
         })}
