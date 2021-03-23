@@ -50,10 +50,9 @@ export default function Home(props) {
 
   const getWeightLiftingLogs = async () => {
     try {
-      const raw = await fetch("/api/amplify/fitness/logs");
-      let data = await raw.json();
-      let dataLogs = data || false;
-      return setStore({ key: "weightliftingLogs", value: dataLogs });
+      const raw = await fetch("/api/logs");
+      let { data } = await raw.json();
+      return setStore({ key: "weightliftingLogs", value: data });
     } catch (err) {
       console.log("getWeightLiftingLogs", err);
     }
@@ -61,6 +60,17 @@ export default function Home(props) {
 
   const getWeightLiftingVideos = async () => {
     try {
+      // const videosList = await Storage.list(`fitness/videos`);
+      // let downloadedVideos = [];
+      // videosList.map(async (v) => {
+      //   let operation;
+      //   if (v.size) {
+      //     operation = await fetch(`/api/videos?id=${v.key}`);
+      //     let data = await operation.json();
+      //     if (data) downloadedVideos.push(data);
+      //   }
+      // });
+
       const videosList = await Storage.list("fitness/videos/");
       let downloadedVideos = [];
       await Promise.all(
@@ -87,39 +97,11 @@ export default function Home(props) {
 
   const getBlogPosts = async () => {
     try {
-      const postsRaw = await fetch("https://api.hashnode.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: process.env.hashnode,
-        },
-        body: JSON.stringify({
-          query: `query {
-            user(username:"petervanegeraat") {
-              publication {
-                posts (page:0) {
-                  cuid
-                  slug
-                  title
-                  type
-                  popularity
-                  dateAdded
-                  dateUpdated
-                  dateFeatured
-                  brief
-                  coverImage
-                  contentMarkdown
-                }
-              }
-            }
-          }`,
-        }),
-      });
-      let postItems = await postsRaw.json();
-      let posts = postItems.data.user.publication.posts || false;
+      const postsRaw = await fetch("/api/posts");
+      const { data } = await postsRaw.json();
       return setStore({
         key: "blogPosts",
-        value: posts,
+        value: data,
       });
     } catch (err) {
       console.log("getWeightLiftingVideos", err);
@@ -128,12 +110,11 @@ export default function Home(props) {
 
   const getTweets = async () => {
     try {
-      const tweetsListRaw = await fetch("/api/oauth2/tweets");
-      let tweetsList = await tweetsListRaw.json();
-      tweetsList = tweetsList || false;
+      const tweetsListRaw = await fetch("/api/tweets");
+      let { data } = await tweetsListRaw.json();
       return setStore({
         key: "tweets",
-        value: tweetsList,
+        value: data,
       });
     } catch (err) {
       console.log("getTweets", err);

@@ -85,7 +85,7 @@ export default function Navbar({ setStore, darkModeActive }) {
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto justify-center">
               <li className="nav-item">
-                <Link href="/resume">
+                <Link href="/work">
                   <a
                     onClick={() => setNavbarOpen(false)}
                     className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
@@ -96,7 +96,7 @@ export default function Navbar({ setStore, darkModeActive }) {
                         darkModeActive ? "text-white" : "text-black"
                       }`}
                     >
-                      Resume
+                      Work
                     </span>
                   </a>
                 </Link>
