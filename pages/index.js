@@ -212,6 +212,9 @@ export default function Home(props) {
   return (
     <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
       <div className="flex flex-wrap flex-col items-stretch">
+        <div className="flex flex-col items-stretch bg-white dark:bg-white my-20">
+          <h1>Filters</h1>
+        </div>
         {list.map((x, i) => {
           return renderDashboardItem(x, i);
         })}

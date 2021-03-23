@@ -17,10 +17,11 @@ function LogHeader(props) {
       value={{ color: props.darkModeActive ? "#fbbf24" : "#CCCCCC" }}
     >
       <div className="flex flex-row justify-center items-center">
+        <span className="opacity-25 dark:text-white text-black text-right pr-4 text-sm">
+          {date} ago
+        </span>
         <hr className="flex flex-1" />
         <div className="flex mx-2">{props.icon}</div>
-        <hr className="flex flex-1" />
-        <span className="dark:text-white text-black pl-5">{date}</span>
       </div>
     </IconContext.Provider>
   );
