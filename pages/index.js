@@ -35,6 +35,7 @@ export default function Home(props) {
   const [projectsActive, setProjectsActive] = useState(true);
   const [employersActive, setEmployersActive] = useState(true);
   const [weightliftingLogsActive, setWeightliftingLogsActive] = useState(true);
+  // const [healthLogs, setHealthLogs] = useState(true);
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
@@ -230,8 +231,8 @@ export default function Home(props) {
 
   const list = getDashboard();
   return (
-    <div className="flex flex-1 flex-col justify-center items-stretch flex-col py-2 sm:px-10 px-5">
-      <div className="flex flex-wrap flex-col items-stretch">
+    <div className="flex flex-1 flex-col justify-start items-stretch flex-col py-2 sm:px-10 px-5">
+      <div className="flex flex-wrap flex-col items-stretch justify-start">
         <div className="flex flex-col items-stretch my-5">
           <div className="flex flex-row justify-start">
             <Filters

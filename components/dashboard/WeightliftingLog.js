@@ -14,6 +14,19 @@ function WeightliftingLog(props) {
 
   // console.log(props);
 
+  const volume = props.exercises.reduce((memo, exercise) => {
+    let part = exercise.sets.reduce((m, s) => {
+      let repsValue = s.reps || 1;
+      let weightValue = s.weight || 1;
+      let sum = repsValue * weightValue;
+      // console.log("---", sum);
+      m = m + sum;
+      return m;
+    }, 0);
+    memo = memo = part;
+    return memo;
+  }, 0);
+
   return (
     <div className="mb-5">
       <LogHeader
@@ -34,31 +47,9 @@ function WeightliftingLog(props) {
                 Peter van Egeraat
               </label>
             </div>
-            <div className="flex flex-col items-stretch">
-              {exercises.map((e, x) => {
-                return (
-                  <div
-                    key={`${e.id}-${x}`}
-                    className="bg-green-400 my-1 mx-1 rounded"
-                  >
-                    <h4 className="dark:text-white text-black text-left px-1 py-0.5">
-                      {e.type.replaceAll("-", " ")}
-                    </h4>
-                    {e.sets.map((s, i) => {
-                      return null;
-                      return (
-                        <label
-                          key={`${s.id}-${i}`}
-                          className="dark:text-white text-black mr-5"
-                        >
-                          {s.weight * s.reps}KG
-                        </label>
-                      );
-                    })}
-                  </div>
-                );
-              })}
-            </div>
+            <small className="flex dark:text-white text-black">
+              {volume}KG
+            </small>
           </div>
         </div>
       </Link>
