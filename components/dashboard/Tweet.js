@@ -80,7 +80,7 @@ function Tweet(props) {
           <small className="flex dark:text-white text-black">
             {truncated ? `${text}...` : `${text}`}
           </small>
-          <div className="max-w-2xl flex flex-nowrap justify-start items-start rounded-sm">
+          <div className="max-w-2xl flex flex-wrap justify-start items-start rounded-sm">
             {images.length
               ? images.map((image, i) => {
                   return (

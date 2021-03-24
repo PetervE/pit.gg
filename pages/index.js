@@ -14,6 +14,7 @@ import Tweet from "../components/dashboard/Tweet";
 import Post from "../components/dashboard/Post";
 import WeightliftingLog from "../components/dashboard/WeightliftingLog";
 import Project from "../components/dashboard/Project";
+import Education from "../components/dashboard/Education";
 import Employer from "../components/dashboard/Employer";
 import Filters from "../components/dashboard/Filters";
 
@@ -33,6 +34,7 @@ export default function Home(props) {
   const [tweetsActive, setTweetsActive] = useState(true);
   const [postsActive, setPostsActive] = useState(true);
   const [projectsActive, setProjectsActive] = useState(true);
+  const [educationActive, setEducationActive] = useState(true);
   const [employersActive, setEmployersActive] = useState(true);
   const [weightliftingLogsActive, setWeightliftingLogsActive] = useState(true);
   // const [healthLogs, setHealthLogs] = useState(true);
@@ -185,6 +187,16 @@ export default function Home(props) {
       });
     }
 
+    if (educationActive) {
+      EDUCATION.map((e) => {
+        list.push({
+          ...e,
+          DASHBOARD_TYPE: "EDUCATION",
+          DASHBOARD_DATE: new Date(e.end_date),
+        });
+      });
+    }
+
     list.sort((a, b) => {
       return b.DASHBOARD_DATE - a.DASHBOARD_DATE;
     });
@@ -214,6 +226,8 @@ export default function Home(props) {
         return <Project key={id} {...item} darkModeActive={darkModeActive} />;
       case "EMPLOYER":
         return <Employer key={id} {...item} darkModeActive={darkModeActive} />;
+      // case "EDUCATION":
+      //   return <Education key={id} {...item} darkModeActive={darkModeActive} />;
 
       default:
         return (
@@ -231,14 +245,17 @@ export default function Home(props) {
 
   const list = getDashboard();
   return (
-    <div className="flex flex-1 flex-col justify-start items-stretch flex-col py-2 sm:px-10 px-5">
+    <div className="flex flex-1 flex-col justify-start items-stretch flex-col">
       <div className="flex flex-wrap flex-col items-stretch justify-start">
-        <div className="flex flex-col items-stretch my-5">
+        <div className="flex flex-col items-stretch">
           <div className="flex flex-row justify-start">
             <Filters
+              darkModeActive={darkModeActive}
               tweetsActive={tweetsActive}
               postsActive={postsActive}
               projectsActive={projectsActive}
+              educationActive={educationActive}
+              setEducationActive={setEducationActive}
               employersActive={employersActive}
               setTweetsActive={setTweetsActive}
               setPostsActive={setPostsActive}
@@ -249,9 +266,11 @@ export default function Home(props) {
             />
           </div>
         </div>
-        {list.map((x, i) => {
-          return renderDashboardItem(x, i);
-        })}
+        <div className="sm:px-10 px-5">
+          {list.map((x, i) => {
+            return renderDashboardItem(x, i);
+          })}
+        </div>
       </div>
     </div>
   );
